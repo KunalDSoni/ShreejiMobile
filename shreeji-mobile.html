@@ -3,24 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shreeji Mobile — Engineered for You</title>
+  <title>Shreeji Mobile — India's Fastest Growing Mobile Franchise</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg-dark: #0a0a0a;
+      --bg-dark: #050505;
+      --bg-surface: #0e0e0e;
+      --bg-card: #151515;
+      --bg-card-hover: #1c1c1c;
       --bg-light: #f5f5f7;
-      --bg-card: #1a1a1a;
       --text-primary: #ffffff;
       --text-secondary: #86868b;
       --text-dark: #1d1d1f;
-      --accent: #2997ff;
+      --accent: #ff6b2c;
+      --accent-glow: rgba(255,107,44,0.15);
+      --accent-blue: #2997ff;
       --accent-green: #30d158;
-      --accent-orange: #ff9f0a;
       --accent-purple: #bf5af2;
-      --accent-red: #ff453a;
+      --accent-yellow: #ffd60a;
       --mono: 'JetBrains Mono', monospace;
       --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -35,15 +38,20 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ========== DOT GRID BACKGROUND ========== */
-    .dot-grid {
+    /* ========== CURSOR GLOW ========== */
+    .cursor-glow {
       position: fixed;
-      inset: 0;
-      z-index: 0;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
       pointer-events: none;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
+      z-index: 0;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s;
+      opacity: 0;
     }
+    .cursor-glow.active { opacity: 1; }
 
     /* ========== NAVBAR ========== */
     nav {
@@ -53,26 +61,40 @@
       right: 0;
       z-index: 1000;
       padding: 0 48px;
-      height: 56px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(10,10,10,0.85);
+      background: rgba(5,5,5,0.8);
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      transition: background 0.3s;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
     }
 
     .nav-logo {
       font-family: var(--mono);
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       letter-spacing: -0.5px;
       color: var(--text-primary);
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .nav-logo span { color: var(--accent); }
+    .nav-logo .logo-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 900;
+      color: #fff;
+    }
+    .nav-logo .logo-text span { color: var(--accent); }
 
     .nav-links {
       display: flex;
@@ -80,28 +102,55 @@
       list-style: none;
     }
     .nav-links a {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 400;
       color: var(--text-secondary);
       text-decoration: none;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
       transition: color 0.2s;
+      position: relative;
     }
     .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
 
     .nav-cta {
-      background: var(--text-primary);
-      color: var(--bg-dark);
-      padding: 8px 20px;
+      background: var(--accent);
+      color: #fff;
+      padding: 9px 22px;
       border-radius: 980px;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.2s;
+      transition: all 0.3s;
+      border: none;
     }
-    .nav-cta:hover { background: var(--accent); color: #fff; }
+    .nav-cta:hover { background: #e55a1e; transform: scale(1.03); }
 
-    /* Mobile menu */
+    .nav-franchise {
+      background: transparent;
+      color: var(--accent);
+      padding: 8px 20px;
+      border-radius: 980px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,107,44,0.3);
+      transition: all 0.3s;
+    }
+    .nav-franchise:hover { border-color: var(--accent); background: var(--accent-glow); }
+
     .nav-hamburger {
       display: none;
       flex-direction: column;
@@ -110,6 +159,7 @@
       background: none;
       border: none;
       padding: 4px;
+      z-index: 1001;
     }
     .nav-hamburger span {
       display: block;
@@ -117,6 +167,69 @@
       height: 1.5px;
       background: var(--text-primary);
       transition: 0.3s;
+    }
+    .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+    .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+    /* ========== MOBILE MENU ========== */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      top: 60px;
+      background: rgba(5,5,5,0.97);
+      backdrop-filter: blur(24px);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 24px;
+      animation: menuSlide 0.3s ease;
+    }
+    .mobile-menu.show { display: flex; }
+    .mobile-menu a {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-menu .mobile-cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 300px;
+      margin-top: 32px;
+    }
+    .mobile-menu .mobile-cta-group a {
+      padding: 16px;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+    }
+    .mobile-menu .mobile-cta-group .mcta-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .mobile-menu .mobile-cta-group .mcta-secondary {
+      background: rgba(255,107,44,0.1);
+      color: var(--accent);
+      border: 1.5px solid rgba(255,107,44,0.3);
+    }
+    @keyframes menuSlide {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* ========== HERO ========== */
@@ -128,62 +241,98 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 120px 24px 80px;
+      padding: 120px 24px 60px;
       overflow: hidden;
     }
 
-    .hero-badge {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: var(--accent);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 24px;
+    .hero-bg-text {
+      position: absolute;
+      font-size: clamp(8rem, 22vw, 18rem);
+      font-weight: 900;
+      color: rgba(255,255,255,0.015);
+      letter-spacing: -8px;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hero-counter {
+      display: flex;
+      gap: 48px;
+      margin-bottom: 40px;
       opacity: 0;
       animation: fadeUp 0.8s 0.2s forwards;
     }
+    .counter-item {
+      text-align: center;
+    }
+    .counter-value {
+      font-family: var(--mono);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .counter-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
 
     .hero h1 {
-      font-size: clamp(3rem, 10vw, 7.5rem);
+      font-size: clamp(2.8rem, 8vw, 6rem);
       font-weight: 900;
       line-height: 0.95;
-      letter-spacing: -4px;
-      margin-bottom: 24px;
+      letter-spacing: -3px;
+      margin-bottom: 20px;
       opacity: 0;
       animation: fadeUp 0.8s 0.4s forwards;
     }
-    .hero h1 .gradient-text {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 50%, var(--accent-red) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .hero h1 .line-accent { color: var(--accent); }
+    .hero h1 .line-dim { color: var(--text-secondary); font-weight: 300; }
+
+    .hero-tagline {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s forwards;
     }
 
     .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
       font-weight: 300;
       color: var(--text-secondary);
-      max-width: 500px;
-      line-height: 1.5;
+      max-width: 560px;
+      line-height: 1.6;
       margin-bottom: 40px;
       opacity: 0;
-      animation: fadeUp 0.8s 0.6s forwards;
+      animation: fadeUp 0.8s 0.5s forwards;
     }
 
     .hero-buttons {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
       justify-content: center;
       opacity: 0;
-      animation: fadeUp 0.8s 0.8s forwards;
+      animation: fadeUp 0.8s 0.6s forwards;
     }
 
     .btn-primary {
       background: var(--accent);
       color: #fff;
-      padding: 14px 32px;
+      padding: 15px 36px;
       border-radius: 980px;
       font-size: 0.95rem;
       font-weight: 600;
@@ -191,119 +340,118 @@
       transition: all 0.3s;
       border: none;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
-    .btn-primary:hover { background: #0077ed; transform: scale(1.03); }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    .btn-primary:hover::before { transform: translateX(100%); }
+    .btn-primary:hover { background: #e55a1e; transform: scale(1.03); }
 
     .btn-secondary {
       background: transparent;
-      color: var(--accent);
-      padding: 14px 32px;
+      color: var(--text-primary);
+      padding: 15px 36px;
       border-radius: 980px;
       font-size: 0.95rem;
       font-weight: 600;
       text-decoration: none;
-      border: 1.5px solid rgba(41,151,255,0.4);
+      border: 1.5px solid rgba(255,255,255,0.15);
       transition: all 0.3s;
     }
-    .btn-secondary:hover { border-color: var(--accent); background: rgba(41,151,255,0.08); }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.04); }
 
-    /* Hero phone mockup */
-    .hero-phone {
-      position: relative;
-      margin-top: 60px;
-      width: 280px;
-      height: 560px;
-      background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      border-radius: 40px;
-      border: 3px solid rgba(255,255,255,0.1);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.05),
-        0 25px 80px rgba(0,0,0,0.5),
-        0 0 120px rgba(41,151,255,0.1);
-      opacity: 0;
-      animation: fadeUp 1s 1s forwards;
+    /* Brand logos scroll */
+    .brand-marquee {
+      width: 100%;
+      margin-top: 80px;
       overflow: hidden;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+      position: relative;
     }
-    .hero-phone::before {
-      content: '';
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 28px;
-      background: #000;
-      border-radius: 20px;
-      z-index: 2;
-    }
-    .hero-phone::after {
+    .brand-marquee::before, .brand-marquee::after {
       content: '';
       position: absolute;
       top: 0;
-      left: 0;
-      right: 0;
       bottom: 0;
-      background: linear-gradient(180deg, rgba(41,151,255,0.08) 0%, transparent 40%, rgba(191,90,242,0.05) 100%);
-      border-radius: 37px;
+      width: 100px;
+      z-index: 2;
+      pointer-events: none;
     }
+    .brand-marquee::before { left: 0; background: linear-gradient(90deg, var(--bg-dark), transparent); }
+    .brand-marquee::after { right: 0; background: linear-gradient(90deg, transparent, var(--bg-dark)); }
 
-    .phone-screen {
-      position: absolute;
-      inset: 8px;
-      border-radius: 32px;
-      background: linear-gradient(180deg, #0d1b2a 0%, #1b263b 100%);
+    .marquee-track {
       display: flex;
-      flex-direction: column;
+      gap: 60px;
       align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      animation: marquee 25s linear infinite;
+      width: max-content;
+    }
+    .marquee-brand {
+      font-family: var(--sans);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.12);
+      white-space: nowrap;
+      letter-spacing: -0.5px;
+      transition: color 0.3s;
+      flex-shrink: 0;
+    }
+    .marquee-brand:hover { color: rgba(255,255,255,0.3); }
+    .marquee-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      flex-shrink: 0;
     }
 
-    .phone-time {
-      font-size: 4rem;
-      font-weight: 200;
-      letter-spacing: -2px;
-      margin-bottom: 4px;
-    }
-    .phone-date {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      font-weight: 400;
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    .phone-glow {
-      position: absolute;
-      bottom: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 180px;
-      height: 180px;
-      background: radial-gradient(circle, rgba(41,151,255,0.3), transparent 70%);
-      filter: blur(40px);
-    }
-
-    /* ========== PRODUCT SHOWCASE ========== */
-    .showcase {
+    /* ========== WHAT WE OFFER ========== */
+    .offer {
       position: relative;
       z-index: 1;
       padding: 120px 24px;
     }
 
-    .showcase-header {
+    .offer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
       text-align: center;
-      margin-bottom: 80px;
+      margin-bottom: 72px;
     }
 
     .section-tag {
       font-family: var(--mono);
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 500;
-      color: var(--accent-green);
       letter-spacing: 3px;
       text-transform: uppercase;
-      margin-bottom: 16px;
-      display: block;
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 980px;
+      margin-bottom: 20px;
     }
+    .tag-orange { color: var(--accent); background: var(--accent-glow); border: 1px solid rgba(255,107,44,0.15); }
+    .tag-blue { color: var(--accent-blue); background: rgba(41,151,255,0.08); border: 1px solid rgba(41,151,255,0.12); }
+    .tag-green { color: var(--accent-green); background: rgba(48,209,88,0.08); border: 1px solid rgba(48,209,88,0.12); }
+    .tag-purple { color: var(--accent-purple); background: rgba(191,90,242,0.08); border: 1px solid rgba(191,90,242,0.12); }
+    .tag-yellow { color: var(--accent-yellow); background: rgba(255,214,10,0.08); border: 1px solid rgba(255,214,10,0.12); }
 
     .section-title {
       font-size: clamp(2rem, 5vw, 3.5rem);
@@ -312,470 +460,533 @@
       line-height: 1.05;
       margin-bottom: 16px;
     }
-
     .section-subtitle {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--text-secondary);
       font-weight: 300;
-      max-width: 480px;
+      max-width: 500px;
       margin: 0 auto;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
-    .product-grid {
+    .offer-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      max-width: 1120px;
-      margin: 0 auto;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
 
-    .product-card {
-      position: relative;
+    .offer-card {
       background: var(--bg-card);
       border-radius: 24px;
-      padding: 48px 40px;
+      padding: 40px 32px;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+      position: relative;
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.06);
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      cursor: pointer;
-      min-height: 480px;
-      display: flex;
-      flex-direction: column;
     }
-    .product-card:hover {
-      border-color: rgba(255,255,255,0.12);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    }
-
-    .product-card.featured {
-      grid-column: span 2;
-      background: linear-gradient(145deg, #1a1a2e 0%, #0d1b2a 100%);
-      min-height: 520px;
-      text-align: center;
-      align-items: center;
-    }
-
-    .card-label {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--accent-orange);
-      margin-bottom: 12px;
-    }
-
-    .card-title {
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -1.5px;
-      margin-bottom: 8px;
-    }
-
-    .card-subtitle {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      font-weight: 300;
-      margin-bottom: 24px;
-      line-height: 1.5;
-    }
-
-    .card-price {
-      font-family: var(--mono);
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 24px;
-    }
-    .card-price small {
-      font-size: 0.7rem;
-      color: var(--text-secondary);
-      font-weight: 400;
-    }
-
-    .card-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--accent);
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: gap 0.3s;
-    }
-    .card-cta:hover { gap: 10px; }
-    .card-cta svg { width: 16px; height: 16px; }
-
-    .card-visual {
-      flex: 1;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      margin-top: 24px;
-      position: relative;
-    }
-
-    .card-phone {
-      width: 160px;
-      height: 320px;
-      background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
-      border-radius: 24px;
-      border: 2px solid rgba(255,255,255,0.08);
-      position: relative;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-    }
-    .card-phone::before {
+    .offer-card::before {
       content: '';
       position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 18px;
-      background: #000;
-      border-radius: 12px;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,107,44,0.3), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
     }
-    .card-phone.phone-blue {
-      background: linear-gradient(145deg, #1a3a5c, #0f2844);
-      box-shadow: 0 20px 60px rgba(41,151,255,0.15);
+    .offer-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.08);
     }
-    .card-phone.phone-green {
-      background: linear-gradient(145deg, #1a3c2a, #0f2818);
-      box-shadow: 0 20px 60px rgba(48,209,88,0.12);
+    .offer-card:hover::before { opacity: 1; }
+
+    .offer-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 1.4rem;
     }
-    .card-phone.phone-purple {
-      background: linear-gradient(145deg, #2a1a3e, #1a0f2e);
-      box-shadow: 0 20px 60px rgba(191,90,242,0.12);
+    .oi-orange { background: var(--accent-glow); }
+    .oi-blue { background: rgba(41,151,255,0.1); }
+    .oi-green { background: rgba(48,209,88,0.1); }
+    .oi-purple { background: rgba(191,90,242,0.1); }
+    .oi-yellow { background: rgba(255,214,10,0.1); }
+    .oi-red { background: rgba(255,69,58,0.1); }
+
+    .offer-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+    .offer-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 300;
     }
 
-    .featured .card-phone {
-      width: 200px;
-      height: 400px;
-      border-radius: 32px;
-    }
-    .featured .card-phone::before {
-      width: 80px;
-      height: 22px;
-      top: 10px;
-    }
-
-    /* ========== SPECS SECTION (Light) ========== */
-    .specs {
+    /* ========== BRANDS SECTION ========== */
+    .brands {
       position: relative;
       z-index: 1;
-      background: var(--bg-light);
-      color: var(--text-dark);
+      background: var(--bg-surface);
       padding: 120px 24px;
     }
 
-    .specs-inner {
-      max-width: 1120px;
+    .brands-inner {
+      max-width: 1200px;
       margin: 0 auto;
     }
 
-    .specs .section-tag { color: var(--accent); }
-    .specs .section-title { color: var(--text-dark); }
-    .specs .section-subtitle { color: #6e6e73; }
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+    }
 
-    .specs-grid {
+    .brand-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 36px 20px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .brand-card:hover {
+      border-color: rgba(255,255,255,0.1);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+    }
+
+    .brand-logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    .brand-card .brand-sub {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      font-family: var(--mono);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .bl-apple { color: #a8a8a8; }
+    .bl-samsung { color: #1428a0; }
+    .bl-oneplus { color: #f5010c; }
+    .bl-vivo { color: #415fff; }
+    .bl-realme { color: #ffc800; }
+    .bl-xiaomi { color: #ff6900; }
+
+    /* ========== WHY FRANCHISE (STATS) ========== */
+    .stats {
+      position: relative;
+      z-index: 1;
+      padding: 120px 24px;
+    }
+
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
+      gap: 16px;
       margin-top: 64px;
     }
 
-    .spec-item {
+    .stat-card {
+      background: var(--bg-card);
+      border-radius: 24px;
+      padding: 40px 28px;
       text-align: center;
-      padding: 40px 20px;
-      background: #fff;
-      border-radius: 20px;
-      border: 1px solid rgba(0,0,0,0.06);
+      border: 1px solid rgba(255,255,255,0.04);
+      position: relative;
+      overflow: hidden;
       transition: all 0.3s;
     }
-    .spec-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    .stat-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255,107,44,0.15);
     }
-
-    .spec-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 1.5rem;
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
     }
-    .spec-icon.blue { background: rgba(41,151,255,0.1); color: var(--accent); }
-    .spec-icon.green { background: rgba(48,209,88,0.1); color: var(--accent-green); }
-    .spec-icon.purple { background: rgba(191,90,242,0.1); color: var(--accent-purple); }
-    .spec-icon.orange { background: rgba(255,159,10,0.1); color: var(--accent-orange); }
+    .stat-card:hover::after { opacity: 1; }
 
-    .spec-value {
-      font-size: 2.2rem;
+    .stat-number {
+      font-family: var(--mono);
+      font-size: 3rem;
       font-weight: 800;
-      letter-spacing: -1px;
-      color: var(--text-dark);
-      margin-bottom: 4px;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
     }
-
-    .spec-label {
+    .stat-label {
       font-size: 0.85rem;
-      color: #6e6e73;
+      color: var(--text-secondary);
       font-weight: 400;
+      line-height: 1.4;
     }
 
-    /* ========== FEATURES SECTION ========== */
-    .features {
+    /* ========== FRANCHISE SECTION ========== */
+    .franchise {
       position: relative;
       z-index: 1;
+      background: var(--bg-surface);
       padding: 120px 24px;
     }
-
-    .features-inner {
-      max-width: 1120px;
+    .franchise-inner {
+      max-width: 1200px;
       margin: 0 auto;
     }
 
-    .feature-row {
+    .franchise-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      gap: 64px;
       align-items: center;
-      margin-bottom: 120px;
+      margin-top: 64px;
     }
-    .feature-row:last-child { margin-bottom: 0; }
-    .feature-row.reverse { direction: rtl; }
-    .feature-row.reverse > * { direction: ltr; }
 
-    .feature-visual {
-      position: relative;
-      height: 400px;
-      border-radius: 24px;
-      overflow: hidden;
+    .franchise-visual {
       background: var(--bg-card);
-      border: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .feature-visual .camera-module {
-      width: 120px;
-      height: 120px;
       border-radius: 28px;
-      background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
-      border: 2px solid rgba(255,255,255,0.08);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      padding: 16px;
+      border: 1px solid rgba(255,255,255,0.04);
+      padding: 48px;
       position: relative;
+      overflow: hidden;
     }
-    .lens {
-      width: 100%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #4a4a6a, #1a1a2e);
-      border: 2px solid rgba(255,255,255,0.1);
-    }
-    .lens-glow {
+    .franchise-visual::before {
+      content: '';
       position: absolute;
-      inset: -40px;
-      background: radial-gradient(circle, rgba(41,151,255,0.08), transparent 70%);
+      inset: 0;
+      background: radial-gradient(circle at 30% 30%, var(--accent-glow), transparent 60%);
       pointer-events: none;
     }
 
-    .feature-visual .battery-visual {
-      width: 200px;
-      height: 100px;
-      border-radius: 16px;
-      border: 3px solid rgba(48,209,88,0.4);
-      padding: 6px;
+    .store-mockup {
       position: relative;
-    }
-    .battery-visual::after {
-      content: '';
-      position: absolute;
-      right: -12px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 8px;
-      height: 30px;
-      background: rgba(48,209,88,0.4);
-      border-radius: 0 4px 4px 0;
-    }
-    .battery-fill {
-      height: 100%;
-      width: 85%;
-      border-radius: 10px;
-      background: linear-gradient(90deg, var(--accent-green), #34c759);
-      animation: batteryPulse 3s infinite;
-    }
-
-    .feature-visual .chip-visual {
-      width: 100px;
-      height: 100px;
-      background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: linear-gradient(145deg, #1a1008, #0d0804);
       border-radius: 16px;
-      border: 1px solid rgba(191,90,242,0.3);
+      border: 1px solid rgba(255,107,44,0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .store-header {
+      padding: 12px 16px;
+      background: rgba(255,107,44,0.06);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255,107,44,0.08);
+    }
+    .store-header .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .dot-r { background: #ff453a; }
+    .dot-y { background: #ffd60a; }
+    .dot-g { background: #30d158; }
+    .store-header span {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--text-secondary);
+      margin-left: 8px;
+    }
+    .store-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      padding: 16px;
+    }
+    .store-phone-slot {
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.04);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--accent-purple);
-      letter-spacing: 1px;
-      position: relative;
+      padding: 10px;
     }
-    .chip-visual::before, .chip-visual::after {
-      content: '';
+    .mini-phone {
+      width: 28px;
+      height: 52px;
+      border-radius: 6px;
+      border: 1.5px solid rgba(255,255,255,0.1);
+    }
+    .mp-1 { background: linear-gradient(145deg, #1a2a4a, #0d1522); }
+    .mp-2 { background: linear-gradient(145deg, #2a1a3e, #150d22); }
+    .mp-3 { background: linear-gradient(145deg, #1a3a2a, #0d2215); }
+    .mp-4 { background: linear-gradient(145deg, #3a2a1a, #22150d); }
+    .mp-5 { background: linear-gradient(145deg, #3a1a2a, #220d15); }
+    .mp-6 { background: linear-gradient(145deg, #1a3a3a, #0d2222); }
+
+    .store-badge {
       position: absolute;
-      background: rgba(191,90,242,0.2);
+      bottom: -12px;
+      right: -12px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 30px rgba(255,107,44,0.3);
     }
-    .chip-visual::before {
-      width: 140%;
-      height: 1px;
-      top: 50%;
-    }
-    .chip-visual::after {
-      width: 1px;
-      height: 140%;
-      left: 50%;
-    }
+    .store-badge .sb-num { font-size: 1.2rem; font-weight: 900; color: #fff; line-height: 1; }
+    .store-badge .sb-text { font-size: 0.4rem; font-weight: 600; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 1px; }
 
-    .feature-content .section-tag { text-align: left; }
-
-    .feature-title {
+    .franchise-content h3 {
       font-size: 2.2rem;
       font-weight: 800;
       letter-spacing: -1.5px;
       line-height: 1.1;
       margin-bottom: 16px;
     }
-
-    .feature-desc {
-      font-size: 1.05rem;
+    .franchise-content h3 span { color: var(--accent); }
+    .franchise-content > p {
+      font-size: 1rem;
       color: var(--text-secondary);
       font-weight: 300;
       line-height: 1.6;
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
 
-    .feature-list {
-      list-style: none;
+    .franchise-steps {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 20px;
+      margin-bottom: 36px;
     }
-    .feature-list li {
+
+    .f-step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .f-step-num {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      border-radius: 10px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(255,107,44,0.2);
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.7);
-    }
-    .feature-list li::before {
-      content: '→';
-      color: var(--accent);
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 0.8rem;
       font-weight: 700;
+      color: var(--accent);
+    }
+    .f-step-content h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .f-step-content p {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    /* ========== STORE LOCATOR ========== */
+    .locator {
+      position: relative;
+      z-index: 1;
+      padding: 120px 24px;
+    }
+    .locator-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .locator-map {
+      background: var(--bg-card);
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.04);
+      padding: 48px;
+      margin-top: 64px;
+      position: relative;
+      overflow: hidden;
+      min-height: 400px;
+    }
+
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .city-card {
+      background: rgba(255,255,255,0.03);
+      border-radius: 16px;
+      padding: 24px 20px;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .city-card:hover {
+      background: rgba(255,107,44,0.05);
+      border-color: rgba(255,107,44,0.15);
+      transform: translateY(-2px);
+    }
+
+    .city-pin {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-bottom: 12px;
+      box-shadow: 0 0 12px rgba(255,107,44,0.4);
+      animation: pinPulse 2s infinite;
+    }
+    @keyframes pinPulse {
+      0%, 100% { box-shadow: 0 0 12px rgba(255,107,44,0.4); }
+      50% { box-shadow: 0 0 20px rgba(255,107,44,0.6); }
+    }
+
+    .city-name {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .city-stores {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-family: var(--mono);
     }
 
     /* ========== TESTIMONIALS ========== */
     .testimonials {
       position: relative;
       z-index: 1;
-      background: var(--bg-light);
-      color: var(--text-dark);
+      background: var(--bg-surface);
       padding: 120px 24px;
     }
-
-    .testimonials .section-tag { color: var(--accent-purple); }
-    .testimonials .section-title { color: var(--text-dark); }
 
     .testimonials-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: 1120px;
+      gap: 16px;
+      max-width: 1200px;
       margin: 64px auto 0;
     }
 
-    .testimonial-card {
-      background: #fff;
-      border-radius: 20px;
-      padding: 36px;
-      border: 1px solid rgba(0,0,0,0.06);
+    .testi-card {
+      background: var(--bg-card);
+      border-radius: 24px;
+      padding: 36px 28px;
+      border: 1px solid rgba(255,255,255,0.04);
       transition: all 0.3s;
+      position: relative;
     }
-    .testimonial-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    .testi-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,0.08);
     }
 
-    .stars {
-      color: var(--accent-orange);
-      font-size: 0.9rem;
+    .testi-quote {
+      font-size: 2rem;
+      color: var(--accent);
+      font-family: Georgia, serif;
+      line-height: 1;
       margin-bottom: 16px;
-      letter-spacing: 2px;
     }
-
-    .testimonial-text {
-      font-size: 0.95rem;
+    .testi-text {
+      font-size: 0.92rem;
       line-height: 1.6;
-      color: #1d1d1f;
-      margin-bottom: 20px;
-      font-weight: 400;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 24px;
+      font-weight: 300;
     }
+    .testi-type {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+    .tt-franchise { color: var(--accent); background: var(--accent-glow); }
+    .tt-customer { color: var(--accent-blue); background: rgba(41,151,255,0.08); }
 
-    .testimonial-author {
+    .testi-author {
       display: flex;
       align-items: center;
       gap: 12px;
     }
-    .author-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+    .testi-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: #fff;
     }
-    .author-name {
+    .ta-1 { background: linear-gradient(135deg, var(--accent), #e55a1e); }
+    .ta-2 { background: linear-gradient(135deg, var(--accent-blue), #0077ed); }
+    .ta-3 { background: linear-gradient(135deg, var(--accent-purple), #9a34d4); }
+
+    .testi-name {
       font-weight: 600;
       font-size: 0.9rem;
-      color: var(--text-dark);
     }
-    .author-title {
-      font-size: 0.75rem;
-      color: #6e6e73;
+    .testi-role {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
     }
 
-    /* ========== CTA SECTION ========== */
+    /* ========== CTA ========== */
     .cta {
       position: relative;
       z-index: 1;
       padding: 120px 24px;
-      text-align: center;
     }
 
     .cta-inner {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
-      background: linear-gradient(145deg, #1a1a2e, #0d1b2a);
+      background: linear-gradient(145deg, #1a0e05, #0d0804);
       border-radius: 32px;
       padding: 80px 48px;
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,107,44,0.1);
       position: relative;
       overflow: hidden;
+      text-align: center;
     }
     .cta-inner::before {
       content: '';
@@ -784,109 +995,119 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle at 30% 30%, rgba(41,151,255,0.06), transparent 50%),
-                  radial-gradient(circle at 70% 70%, rgba(191,90,242,0.06), transparent 50%);
+      background: radial-gradient(circle at 30% 20%, rgba(255,107,44,0.06), transparent 40%),
+                  radial-gradient(circle at 70% 80%, rgba(41,151,255,0.04), transparent 40%);
       pointer-events: none;
     }
-
-    .cta h2 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -2px;
-      margin-bottom: 16px;
-      position: relative;
-    }
-    .cta p {
-      font-size: 1.1rem;
+    .cta-inner .section-title, .cta-inner p, .cta-inner .btn-primary { position: relative; }
+    .cta-inner p {
+      font-size: 1.05rem;
       color: var(--text-secondary);
       font-weight: 300;
-      margin-bottom: 32px;
+      margin-bottom: 36px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
       position: relative;
     }
-    .cta .btn-primary { position: relative; }
 
     /* ========== FOOTER ========== */
     footer {
       position: relative;
       z-index: 1;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 64px 48px 32px;
-      max-width: 1120px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding: 72px 48px 32px;
+    }
+    .footer-inner {
+      max-width: 1200px;
       margin: 0 auto;
     }
 
     .footer-top {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 48px;
+      grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 56px;
     }
 
-    .footer-brand {
-      font-family: var(--mono);
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 12px;
-    }
-    .footer-brand span { color: var(--accent); }
+    .footer-brand-block .nav-logo { margin-bottom: 14px; }
     .footer-tagline {
       font-size: 0.85rem;
       color: var(--text-secondary);
-      line-height: 1.5;
-      max-width: 280px;
-    }
-
-    .footer-col h4 {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-    }
-    .footer-col a {
-      display: block;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
-      margin-bottom: 10px;
-      transition: color 0.2s;
-    }
-    .footer-col a:hover { color: var(--text-primary); }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 32px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .footer-copy {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 300px;
+      margin-bottom: 20px;
     }
     .footer-socials {
       display: flex;
-      gap: 16px;
+      gap: 10px;
     }
     .footer-socials a {
       width: 36px;
       height: 36px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.04);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 600;
       transition: all 0.2s;
+      border: 1px solid rgba(255,255,255,0.04);
     }
-    .footer-socials a:hover {
-      background: var(--accent);
-      color: #fff;
+    .footer-socials a:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .footer-col h4 {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: 18px;
     }
+    .footer-col a {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--accent); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .footer-copy {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+    }
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-legal a {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: var(--text-primary); }
 
     /* ========== ANIMATIONS ========== */
     @keyframes fadeUp {
@@ -894,421 +1115,451 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes batteryPulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-
     .reveal {
       opacity: 0;
       transform: translateY(40px);
-      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                  transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ========== MOBILE MENU OVERLAY ========== */
-    .nav-links.show {
-      display: flex !important;
-      position: fixed;
-      inset: 0;
-      top: 56px;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      background: rgba(10,10,10,0.97);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      z-index: 999;
-      padding: 40px 24px;
-      animation: menuFade 0.3s ease;
-    }
-    .nav-links.show li {
-      width: 100%;
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .nav-links.show li:last-child { border-bottom: none; }
-    .nav-links.show a {
-      display: block;
-      font-size: 1.2rem;
-      padding: 20px 0;
-      color: var(--text-primary);
-      font-weight: 500;
-      letter-spacing: 0;
-    }
-    @keyframes menuFade {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Hamburger animation */
-    .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
-    .nav-hamburger.active span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
 
     /* ========== RESPONSIVE ========== */
 
-    /* Tablet */
     @media (max-width: 1024px) {
-      .product-grid { grid-template-columns: 1fr; }
-      .product-card.featured { grid-column: span 1; }
-      .specs-grid { grid-template-columns: repeat(2, 1fr); }
-      .feature-row { grid-template-columns: 1fr; gap: 40px; }
-      .feature-row.reverse { direction: ltr; }
+      .offer-grid { grid-template-columns: repeat(2, 1fr); }
+      .brands-grid { grid-template-columns: repeat(3, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .franchise-layout { grid-template-columns: 1fr; gap: 48px; }
+      .map-grid { grid-template-columns: repeat(2, 1fr); }
       .testimonials-grid { grid-template-columns: 1fr 1fr; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
     }
 
-    /* Mobile */
     @media (max-width: 768px) {
-      nav { padding: 0 16px; height: 52px; }
-      .nav-links { display: none; }
+      nav { padding: 0 16px; height: 56px; }
+      .nav-links, .nav-actions { display: none; }
       .nav-hamburger { display: flex; }
-      .nav-cta { display: none; }
-      .nav-logo { font-size: 0.95rem; }
+      .nav-logo { font-size: 1rem; }
+      .cursor-glow { display: none; }
 
-      .hero { padding: 90px 16px 48px; min-height: auto; }
-      .hero h1 { font-size: 3.2rem; letter-spacing: -2px; }
-      .hero-badge { font-size: 0.6rem; letter-spacing: 2px; margin-bottom: 16px; }
-      .hero-sub { font-size: 0.95rem; margin-bottom: 28px; }
+      .hero { padding: 100px 16px 48px; min-height: auto; }
+      .hero h1 { font-size: 2.8rem; letter-spacing: -2px; }
+      .hero-tagline { font-size: 0.65rem; letter-spacing: 2px; }
+      .hero-sub { font-size: 0.92rem; margin-bottom: 28px; }
+      .hero-counter { gap: 24px; margin-bottom: 28px; }
+      .counter-value { font-size: 1.8rem; }
+      .counter-label { font-size: 0.6rem; }
 
-      .hero-phone {
-        width: 200px; height: 400px;
-        border-radius: 28px;
-        margin-top: 40px;
-      }
-      .hero-phone::before { width: 70px; height: 20px; border-radius: 12px; top: 10px; }
-      .phone-screen { inset: 6px; border-radius: 22px; }
-      .phone-time { font-size: 3rem; }
-      .phone-date { font-size: 0.75rem; }
-
-      .hero-buttons { flex-direction: column; align-items: stretch; gap: 12px; }
+      .hero-buttons { flex-direction: column; align-items: stretch; gap: 10px; }
       .btn-primary, .btn-secondary {
         text-align: center;
         padding: 16px 28px;
         font-size: 0.95rem;
         width: 100%;
-        max-width: 320px;
+        max-width: 340px;
         margin: 0 auto;
       }
+      .brand-marquee { margin-top: 48px; }
+      .marquee-brand { font-size: 1.1rem; }
 
-      .showcase, .features, .cta { padding: 64px 16px; }
-      .showcase-header { margin-bottom: 48px; }
+      .offer, .stats, .locator, .cta { padding: 72px 16px; }
+      .franchise, .brands, .testimonials { padding: 72px 16px; }
+      .section-header { margin-bottom: 48px; }
       .section-title { font-size: 2rem; letter-spacing: -1px; }
-      .section-subtitle { font-size: 0.95rem; }
-      .section-tag { font-size: 0.6rem; letter-spacing: 2px; }
+      .section-subtitle { font-size: 0.92rem; }
 
-      .product-card {
-        padding: 28px 20px;
-        min-height: 360px;
-        border-radius: 20px;
-      }
-      .product-card.featured { min-height: 400px; padding: 32px 24px; }
-      .card-title { font-size: 1.6rem; }
-      .card-subtitle { font-size: 0.9rem; }
-      .card-price { font-size: 1.5rem; }
-      .card-phone { width: 130px; height: 260px; border-radius: 20px; }
-      .card-phone::before { width: 50px; height: 14px; top: 6px; }
-      .featured .card-phone { width: 160px; height: 320px; border-radius: 24px; }
-      .featured .card-phone::before { width: 60px; height: 16px; top: 8px; }
+      .offer-grid { grid-template-columns: 1fr; gap: 12px; }
+      .offer-card { padding: 28px 24px; border-radius: 20px; }
 
-      .specs { padding: 64px 16px; }
-      .specs-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 40px; }
-      .spec-item { padding: 24px 12px; border-radius: 16px; }
-      .spec-icon { width: 44px; height: 44px; border-radius: 12px; margin-bottom: 14px; }
-      .spec-icon svg { width: 20px; height: 20px; }
-      .spec-value { font-size: 1.5rem; }
-      .spec-label { font-size: 0.75rem; }
+      .brands-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .brand-card { padding: 24px 12px; border-radius: 14px; }
+      .brand-logo { font-size: 1.2rem; }
 
-      .feature-row { gap: 28px; margin-bottom: 80px; }
-      .feature-visual { height: 240px; border-radius: 20px; }
-      .feature-title { font-size: 1.6rem; }
-      .feature-desc { font-size: 0.9rem; }
-      .feature-list li { font-size: 0.85rem; }
-      .camera-module { width: 100px; height: 100px; border-radius: 22px; padding: 12px; gap: 6px; }
-      .battery-visual { width: 160px; height: 80px; }
-      .chip-visual { width: 80px; height: 80px; font-size: 0.6rem; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .stat-card { padding: 28px 20px; border-radius: 20px; }
+      .stat-number { font-size: 2.2rem; }
 
-      .testimonials { padding: 64px 16px; }
-      .testimonials-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
-      .testimonial-card { padding: 24px 20px; border-radius: 16px; }
-      .testimonial-text { font-size: 0.9rem; }
-      .stars { font-size: 0.8rem; margin-bottom: 12px; }
+      .franchise-visual { padding: 28px; border-radius: 20px; }
+      .franchise-content h3 { font-size: 1.8rem; }
+      .store-badge { width: 60px; height: 60px; bottom: -8px; right: -8px; }
+      .store-badge .sb-num { font-size: 0.9rem; }
+
+      .map-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .locator-map { padding: 24px; border-radius: 20px; }
+      .city-card { padding: 20px 16px; }
+
+      .testimonials-grid { grid-template-columns: 1fr; gap: 12px; }
+      .testi-card { padding: 28px 24px; border-radius: 20px; }
 
       .cta-inner { padding: 48px 20px; border-radius: 24px; }
-      .cta h2 { font-size: 1.8rem; letter-spacing: -1px; }
-      .cta p { font-size: 0.95rem; }
+      .cta-inner .section-title { font-size: 1.8rem; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .cta-buttons .btn-primary, .cta-buttons .btn-secondary { width: 100%; max-width: 300px; }
 
-      footer { padding: 40px 16px 20px; }
+      footer { padding: 48px 16px 20px; }
       .footer-top { grid-template-columns: 1fr; gap: 28px; }
-      .footer-brand { font-size: 0.95rem; }
-      .footer-tagline { font-size: 0.8rem; }
-      .footer-col h4 { font-size: 0.65rem; margin-bottom: 10px; }
-      .footer-col a { font-size: 0.8rem; margin-bottom: 8px; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-      .footer-copy { font-size: 0.7rem; }
+      .footer-legal { justify-content: center; }
     }
 
-    /* Small phones */
     @media (max-width: 390px) {
-      .hero h1 { font-size: 2.6rem; letter-spacing: -1.5px; }
-      .hero-sub { font-size: 0.85rem; }
-      .hero-phone { width: 180px; height: 360px; border-radius: 24px; }
-      .phone-time { font-size: 2.5rem; }
+      .hero h1 { font-size: 2.2rem; letter-spacing: -1.5px; }
+      .hero-counter { gap: 16px; }
+      .counter-value { font-size: 1.5rem; }
       .section-title { font-size: 1.7rem; }
-      .card-title { font-size: 1.4rem; }
-      .card-price { font-size: 1.3rem; }
-      .spec-value { font-size: 1.3rem; }
-      .feature-title { font-size: 1.4rem; }
-      .cta h2 { font-size: 1.5rem; }
-      .product-card { padding: 24px 16px; min-height: 320px; }
-      .featured .card-phone { width: 140px; height: 280px; }
+      .brands-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-number { font-size: 1.8rem; }
+      .franchise-content h3 { font-size: 1.5rem; }
+      .cta-inner .section-title { font-size: 1.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <div class="dot-grid"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
 
   <!-- NAVBAR -->
   <nav>
-    <a href="#" class="nav-logo">shreeji<span> mobile</span></a>
+    <a href="#" class="nav-logo">
+      <div class="logo-icon">SM</div>
+      <div class="logo-text">shreeji <span>mobile</span></div>
+    </a>
     <ul class="nav-links">
-      <li><a href="#products">Products</a></li>
-      <li><a href="#specs">Specs</a></li>
-      <li><a href="#features">Features</a></li>
+      <li><a href="#offer">What We Do</a></li>
+      <li><a href="#brands">Brands</a></li>
+      <li><a href="#franchise">Franchise</a></li>
+      <li><a href="#stores">Stores</a></li>
       <li><a href="#reviews">Reviews</a></li>
-      <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="#products" class="nav-cta">Shop Now</a>
+    <div class="nav-actions">
+      <a href="#franchise" class="nav-franchise">Own a Franchise</a>
+      <a href="#stores" class="nav-cta">Find Store</a>
+    </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#offer">What We Do</a>
+    <a href="#brands">Brands</a>
+    <a href="#franchise">Franchise</a>
+    <a href="#stores">Stores</a>
+    <a href="#reviews">Reviews</a>
+    <div class="mobile-cta-group">
+      <a href="#franchise" class="mcta-secondary">Own a Franchise</a>
+      <a href="#stores" class="mcta-primary">Find a Store</a>
+    </div>
+  </div>
+
   <!-- HERO -->
   <section class="hero">
-    <span class="hero-badge">Introducing Shreeji S1 Pro</span>
+    <div class="hero-bg-text">SHREEJI</div>
+
+    <div class="hero-counter">
+      <div class="counter-item">
+        <div class="counter-value" data-target="500">0</div>
+        <div class="counter-label">Stores</div>
+      </div>
+      <div class="counter-item">
+        <div class="counter-value" data-target="28">0</div>
+        <div class="counter-label">States</div>
+      </div>
+      <div class="counter-item">
+        <div class="counter-value" data-target="50">0</div>
+        <div class="counter-label">Brands</div>
+      </div>
+    </div>
+
+    <div class="hero-tagline">India's #1 Mobile Retail Franchise</div>
+
     <h1>
-      <span class="gradient-text">Built</span><br>
-      Different.
+      Your Phone.<br>
+      <span class="line-accent">Our Expertise.</span><br>
+      <span class="line-dim">Every Brand. One Roof.</span>
     </h1>
+
     <p class="hero-sub">
-      Premium smartphones engineered with precision. Designed for those who demand more.
+      From Apple to Xiaomi — walk into any Shreeji Mobile store and discover the perfect phone, with expert guidance and unbeatable deals. Want to own a store? We've got a franchise for that too.
     </p>
+
     <div class="hero-buttons">
-      <a href="#products" class="btn-primary">Explore Models</a>
-      <a href="#specs" class="btn-secondary">View Specs</a>
+      <a href="#stores" class="btn-primary">Find Nearest Store</a>
+      <a href="#franchise" class="btn-secondary">Start a Franchise →</a>
     </div>
 
-    <div class="hero-phone">
-      <div class="phone-screen">
-        <span class="phone-time" id="heroTime">09:41</span>
-        <span class="phone-date" id="heroDate">Thursday, March 20</span>
-        <div class="phone-glow"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUCTS -->
-  <section class="showcase" id="products">
-    <div class="showcase-header reveal">
-      <span class="section-tag">Our Lineup</span>
-      <h2 class="section-title">Choose Your<br>Shreeji.</h2>
-      <p class="section-subtitle">Three phones. Three statements. One standard of excellence.</p>
-    </div>
-
-    <div class="product-grid">
-      <!-- Featured Card -->
-      <div class="product-card featured reveal">
-        <span class="card-label">Flagship</span>
-        <h3 class="card-title">Shreeji S1 Pro</h3>
-        <p class="card-subtitle">Our most powerful phone ever. Titanium build, 200MP camera, all-day battery.</p>
-        <div class="card-price">₹29,999 <small>starting</small></div>
-        <a href="#" class="card-cta">
-          Learn more
-          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <div class="card-visual">
-          <div class="card-phone phone-blue"></div>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="product-card reveal">
-        <span class="card-label" style="color: var(--accent-green)">Mid-Range</span>
-        <h3 class="card-title">Shreeji A5</h3>
-        <p class="card-subtitle">Everything you need. Nothing you don't. Clean design, powerful performance.</p>
-        <div class="card-price">₹17,999 <small>starting</small></div>
-        <a href="#" class="card-cta">
-          Learn more
-          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <div class="card-visual">
-          <div class="card-phone phone-green"></div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="product-card reveal">
-        <span class="card-label" style="color: var(--accent-purple)">Essential</span>
-        <h3 class="card-title">Shreeji E1</h3>
-        <p class="card-subtitle">Premium feel at an accessible price. The perfect first smartphone.</p>
-        <div class="card-price">₹9,999 <small>starting</small></div>
-        <a href="#" class="card-cta">
-          Learn more
-          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <div class="card-visual">
-          <div class="card-phone phone-purple"></div>
-        </div>
+    <!-- Brand marquee -->
+    <div class="brand-marquee">
+      <div class="marquee-track" id="marqueeTrack">
+        <span class="marquee-brand">Apple</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">Samsung</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">OnePlus</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">Vivo</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">Realme</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">Xiaomi</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">OPPO</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">Nothing</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">Google Pixel</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">Motorola</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">iQOO</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">POCO</span><span class="marquee-dot"></span>
+        <!-- duplicate for seamless loop -->
+        <span class="marquee-brand">Apple</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">Samsung</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">OnePlus</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">Vivo</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">Realme</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">Xiaomi</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">OPPO</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">Nothing</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">Google Pixel</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">Motorola</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">iQOO</span><span class="marquee-dot"></span>
+        <span class="marquee-brand">POCO</span><span class="marquee-dot"></span>
       </div>
     </div>
   </section>
 
-  <!-- SPECS -->
-  <section class="specs" id="specs">
-    <div class="specs-inner">
-      <div class="showcase-header reveal">
-        <span class="section-tag">S1 Pro Specs</span>
-        <h2 class="section-title">Numbers That<br>Speak.</h2>
-        <p class="section-subtitle">Every specification engineered for real-world performance.</p>
+  <!-- WHAT WE OFFER -->
+  <section class="offer" id="offer">
+    <div class="offer-inner">
+      <div class="section-header reveal">
+        <span class="section-tag tag-orange">What We Offer</span>
+        <h2 class="section-title">Not Just a Phone Store.<br>An Experience.</h2>
+        <p class="section-subtitle">Walk in for a phone. Walk out with the right one — backed by service that lasts.</p>
       </div>
 
-      <div class="specs-grid">
-        <div class="spec-item reveal">
-          <div class="spec-icon blue">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
-          </div>
-          <div class="spec-value">6.7"</div>
-          <div class="spec-label">AMOLED Display</div>
+      <div class="offer-grid">
+        <div class="offer-card reveal">
+          <div class="offer-icon oi-orange">📱</div>
+          <h3>All Brands, One Roof</h3>
+          <p>Apple, Samsung, OnePlus, Vivo, Xiaomi, Realme — compare side by side. No brand bias, just honest advice.</p>
         </div>
-        <div class="spec-item reveal">
-          <div class="spec-icon green">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/></svg>
-          </div>
-          <div class="spec-value">5500</div>
-          <div class="spec-label">mAh Battery</div>
+        <div class="offer-card reveal reveal-delay-1">
+          <div class="offer-icon oi-blue">💰</div>
+          <h3>Best Price Guarantee</h3>
+          <p>We match any authorized retailer's price. Plus exclusive bundle deals, exchange offers, and festival discounts.</p>
         </div>
-        <div class="spec-item reveal">
-          <div class="spec-icon purple">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-          </div>
-          <div class="spec-value">200MP</div>
-          <div class="spec-label">Main Camera</div>
+        <div class="offer-card reveal reveal-delay-2">
+          <div class="offer-icon oi-green">🛡️</div>
+          <h3>Extended Warranty</h3>
+          <p>Free 6-month extended warranty on every phone. Shreeji Shield covers accidental damage, screen breaks & more.</p>
         </div>
-        <div class="spec-item reveal">
-          <div class="spec-icon orange">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          </div>
-          <div class="spec-value">120Hz</div>
-          <div class="spec-label">Refresh Rate</div>
+        <div class="offer-card reveal reveal-delay-1">
+          <div class="offer-icon oi-purple">🔄</div>
+          <h3>Easy Exchange & EMI</h3>
+          <p>Trade in your old phone and get instant credit. 0% EMI options on all major banks and credit cards.</p>
         </div>
-        <div class="spec-item reveal">
-          <div class="spec-icon blue">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
-          </div>
-          <div class="spec-value">12GB</div>
-          <div class="spec-label">RAM</div>
+        <div class="offer-card reveal reveal-delay-2">
+          <div class="offer-icon oi-yellow">🎧</div>
+          <h3>Accessories Hub</h3>
+          <p>Curated collection of cases, chargers, earbuds, smartwatches, and power banks from top brands.</p>
         </div>
-        <div class="spec-item reveal">
-          <div class="spec-icon green">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73L13 2.27a2 2 0 0 0-2 0L4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-          </div>
-          <div class="spec-value">256GB</div>
-          <div class="spec-label">Storage</div>
-        </div>
-        <div class="spec-item reveal">
-          <div class="spec-icon purple">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div class="spec-value">IP68</div>
-          <div class="spec-label">Water Resistant</div>
-        </div>
-        <div class="spec-item reveal">
-          <div class="spec-icon orange">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
-          </div>
-          <div class="spec-value">5G</div>
-          <div class="spec-label">Connectivity</div>
+        <div class="offer-card reveal reveal-delay-3">
+          <div class="offer-icon oi-red">🔧</div>
+          <h3>In-Store Service</h3>
+          <p>Screen protector installation, data transfer, phone setup — all complimentary with every purchase.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FEATURES -->
-  <section class="features" id="features">
-    <div class="features-inner">
-      <div class="showcase-header reveal">
-        <span class="section-tag" style="color: var(--accent-purple)">Crafted with Care</span>
-        <h2 class="section-title">Why Shreeji?</h2>
-        <p class="section-subtitle">Every detail is designed with intention.</p>
+  <!-- BRANDS -->
+  <section class="brands" id="brands">
+    <div class="brands-inner">
+      <div class="section-header reveal">
+        <span class="section-tag tag-blue">Authorized Retailer</span>
+        <h2 class="section-title">Every Brand<br>You Love.</h2>
+        <p class="section-subtitle">Authorized partner for 50+ brands. Every phone is genuine, sealed, and warranty-backed.</p>
       </div>
 
-      <!-- Feature 1 -->
-      <div class="feature-row reveal">
-        <div class="feature-visual">
-          <div class="camera-module">
-            <div class="lens"></div>
-            <div class="lens"></div>
-            <div class="lens"></div>
-            <div class="lens" style="background: radial-gradient(circle at 35% 35%, #5a4a7a, #2a1a3e);"></div>
-            <div class="lens-glow"></div>
+      <div class="brands-grid">
+        <div class="brand-card reveal">
+          <div class="brand-logo bl-apple">Apple</div>
+          <div class="brand-sub">Premium Partner</div>
+        </div>
+        <div class="brand-card reveal reveal-delay-1">
+          <div class="brand-logo bl-samsung">Samsung</div>
+          <div class="brand-sub">Authorized Dealer</div>
+        </div>
+        <div class="brand-card reveal reveal-delay-1">
+          <div class="brand-logo bl-oneplus">OnePlus</div>
+          <div class="brand-sub">Exclusive Partner</div>
+        </div>
+        <div class="brand-card reveal reveal-delay-2">
+          <div class="brand-logo bl-vivo">vivo</div>
+          <div class="brand-sub">Authorized Dealer</div>
+        </div>
+        <div class="brand-card reveal reveal-delay-2">
+          <div class="brand-logo bl-realme">realme</div>
+          <div class="brand-sub">Official Partner</div>
+        </div>
+        <div class="brand-card reveal reveal-delay-3">
+          <div class="brand-logo bl-xiaomi">Xiaomi</div>
+          <div class="brand-sub">Preferred Retailer</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS / WHY US -->
+  <section class="stats">
+    <div class="stats-inner">
+      <div class="section-header reveal">
+        <span class="section-tag tag-green">The Numbers</span>
+        <h2 class="section-title">Growing Faster Than<br>Any Other Chain.</h2>
+        <p class="section-subtitle">From 1 store to 500+ in 8 years. Here's what powers the Shreeji effect.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card reveal">
+          <div class="stat-number" data-target="500" data-suffix="+">0</div>
+          <div class="stat-label">Franchise Stores<br>Across India</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-1">
+          <div class="stat-number" data-target="28" data-suffix="">0</div>
+          <div class="stat-label">States &<br>Union Territories</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-2">
+          <div class="stat-number" data-target="10" data-suffix="L+">0</div>
+          <div class="stat-label">Happy Customers<br>Every Year</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-3">
+          <div class="stat-number" data-target="4.8" data-suffix="★" data-decimal="true">0</div>
+          <div class="stat-label">Average Google<br>Rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRANCHISE -->
+  <section class="franchise" id="franchise">
+    <div class="franchise-inner">
+      <div class="section-header reveal">
+        <span class="section-tag tag-orange">Own a Franchise</span>
+        <h2 class="section-title">Be Your Own Boss.<br>With India's Best Brand.</h2>
+      </div>
+
+      <div class="franchise-layout">
+        <div class="franchise-visual reveal">
+          <div class="store-mockup">
+            <div class="store-header">
+              <div class="dot dot-r"></div>
+              <div class="dot dot-y"></div>
+              <div class="dot dot-g"></div>
+              <span>shreeji-mobile-store.live</span>
+            </div>
+            <div class="store-body">
+              <div class="store-phone-slot"><div class="mini-phone mp-1"></div></div>
+              <div class="store-phone-slot"><div class="mini-phone mp-2"></div></div>
+              <div class="store-phone-slot"><div class="mini-phone mp-3"></div></div>
+              <div class="store-phone-slot"><div class="mini-phone mp-4"></div></div>
+              <div class="store-phone-slot"><div class="mini-phone mp-5"></div></div>
+              <div class="store-phone-slot"><div class="mini-phone mp-6"></div></div>
+            </div>
+          </div>
+          <div class="store-badge">
+            <div class="sb-num">₹5L</div>
+            <div class="sb-text">Starts at</div>
           </div>
         </div>
-        <div class="feature-content">
-          <span class="section-tag">Camera System</span>
-          <h3 class="feature-title">See the World<br>in 200MP.</h3>
-          <p class="feature-desc">Quad camera system with AI-powered night mode, 8K video recording, and pro-level computational photography.</p>
-          <ul class="feature-list">
-            <li>200MP main sensor with OIS</li>
-            <li>50MP ultrawide lens</li>
-            <li>12MP telephoto with 5x optical zoom</li>
-            <li>AI-enhanced night photography</li>
-          </ul>
-        </div>
-      </div>
 
-      <!-- Feature 2 -->
-      <div class="feature-row reverse reveal">
-        <div class="feature-visual">
-          <div class="battery-visual">
-            <div class="battery-fill"></div>
+        <div class="franchise-content reveal">
+          <h3>Start Your <span>Shreeji Mobile</span> Store in 4 Easy Steps</h3>
+          <p>Low investment, high returns. We handle supply chain, branding, training, and marketing — you focus on sales.</p>
+
+          <div class="franchise-steps">
+            <div class="f-step">
+              <div class="f-step-num">01</div>
+              <div class="f-step-content">
+                <h4>Apply Online</h4>
+                <p>Fill a simple form. We'll review your location & profile.</p>
+              </div>
+            </div>
+            <div class="f-step">
+              <div class="f-step-num">02</div>
+              <div class="f-step-content">
+                <h4>Setup & Training</h4>
+                <p>We design your store, handle inventory, and train your team.</p>
+              </div>
+            </div>
+            <div class="f-step">
+              <div class="f-step-num">03</div>
+              <div class="f-step-content">
+                <h4>Grand Launch</h4>
+                <p>Marketing blitz, social media push, and inaugural offers.</p>
+              </div>
+            </div>
+            <div class="f-step">
+              <div class="f-step-num">04</div>
+              <div class="f-step-content">
+                <h4>Earn & Grow</h4>
+                <p>Average franchise ROI within 12-18 months. Ongoing support forever.</p>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="feature-content">
-          <span class="section-tag" style="color: var(--accent-green)">All-Day Battery</span>
-          <h3 class="feature-title">Power That<br>Keeps Up.</h3>
-          <p class="feature-desc">5500mAh battery with 67W fast charging. From 0 to 50% in just 15 minutes.</p>
-          <ul class="feature-list">
-            <li>5500mAh high-density cell</li>
-            <li>67W wired fast charging</li>
-            <li>15W wireless charging</li>
-            <li>Reverse wireless charging</li>
-          </ul>
+
+          <a href="#contact" class="btn-primary">Apply for Franchise</a>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Feature 3 -->
-      <div class="feature-row reveal">
-        <div class="feature-visual">
-          <div class="chip-visual">SM-1</div>
-        </div>
-        <div class="feature-content">
-          <span class="section-tag" style="color: var(--accent-orange)">Performance</span>
-          <h3 class="feature-title">Speed Without<br>Compromise.</h3>
-          <p class="feature-desc">Powered by the latest flagship chipset with 12GB RAM. Effortless multitasking, gaming, and productivity.</p>
-          <ul class="feature-list">
-            <li>Flagship octa-core processor</li>
-            <li>12GB LPDDR5X RAM</li>
-            <li>256GB UFS 4.0 storage</li>
-            <li>Advanced AI engine</li>
-          </ul>
+  <!-- STORE LOCATOR -->
+  <section class="locator" id="stores">
+    <div class="locator-inner">
+      <div class="section-header reveal">
+        <span class="section-tag tag-purple">Find Us</span>
+        <h2 class="section-title">500+ Stores.<br>Probably Near You.</h2>
+        <p class="section-subtitle">Walk in, try any phone, and walk out with the best deal — guaranteed.</p>
+      </div>
+
+      <div class="locator-map reveal">
+        <div class="map-grid">
+          <div class="city-card">
+            <div class="city-pin"></div>
+            <div class="city-name">Mumbai</div>
+            <div class="city-stores">42 stores</div>
+          </div>
+          <div class="city-card">
+            <div class="city-pin"></div>
+            <div class="city-name">Delhi NCR</div>
+            <div class="city-stores">38 stores</div>
+          </div>
+          <div class="city-card">
+            <div class="city-pin"></div>
+            <div class="city-name">Bangalore</div>
+            <div class="city-stores">31 stores</div>
+          </div>
+          <div class="city-card">
+            <div class="city-pin"></div>
+            <div class="city-name">Ahmedabad</div>
+            <div class="city-stores">28 stores</div>
+          </div>
+          <div class="city-card">
+            <div class="city-pin"></div>
+            <div class="city-name">Hyderabad</div>
+            <div class="city-stores">25 stores</div>
+          </div>
+          <div class="city-card">
+            <div class="city-pin"></div>
+            <div class="city-name">Pune</div>
+            <div class="city-stores">22 stores</div>
+          </div>
+          <div class="city-card">
+            <div class="city-pin"></div>
+            <div class="city-name">Chennai</div>
+            <div class="city-stores">20 stores</div>
+          </div>
+          <div class="city-card">
+            <div class="city-pin"></div>
+            <div class="city-name">Kolkata</div>
+            <div class="city-stores">18 stores</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1316,44 +1567,47 @@
 
   <!-- TESTIMONIALS -->
   <section class="testimonials" id="reviews">
-    <div class="showcase-header reveal">
-      <span class="section-tag">What People Say</span>
-      <h2 class="section-title">Loved by<br>Thousands.</h2>
+    <div class="section-header reveal">
+      <span class="section-tag tag-yellow">What People Say</span>
+      <h2 class="section-title">Trusted by Customers.<br>Loved by Franchise Owners.</h2>
     </div>
 
     <div class="testimonials-grid">
-      <div class="testimonial-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">The camera quality is unreal for this price point. Night mode photos look like they were taken on a flagship device costing twice as much.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">RK</div>
+      <div class="testi-card reveal">
+        <div class="testi-type tt-franchise">Franchise Owner</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">I invested ₹8L and hit ROI in 14 months. The supply chain support from Shreeji is unmatched. Best business decision I ever made.</p>
+        <div class="testi-author">
+          <div class="testi-avatar ta-1">RV</div>
           <div>
-            <div class="author-name">Rahul Kumar</div>
-            <div class="author-title">Tech Reviewer</div>
+            <div class="testi-name">Rajesh Verma</div>
+            <div class="testi-role">Franchise Owner, Jaipur</div>
           </div>
         </div>
       </div>
 
-      <div class="testimonial-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">Battery life is a game changer. I go through an entire day of heavy use and still have 30% left. The fast charging is incredibly convenient.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">PS</div>
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-type tt-customer">Customer</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">The staff actually helped me pick the right phone instead of pushing the most expensive one. Got an amazing exchange deal on my old phone too.</p>
+        <div class="testi-author">
+          <div class="testi-avatar ta-2">PS</div>
           <div>
-            <div class="author-name">Priya Sharma</div>
-            <div class="author-title">Content Creator</div>
+            <div class="testi-name">Priya Singh</div>
+            <div class="testi-role">Customer, Mumbai</div>
           </div>
         </div>
       </div>
 
-      <div class="testimonial-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">Finally, a brand that understands design. The build quality and attention to detail rival phones that cost three times more.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">AM</div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-type tt-franchise">Franchise Owner</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">From store design to marketing, they handled everything. I just show up and run the business. Already opening my second store!</p>
+        <div class="testi-author">
+          <div class="testi-avatar ta-3">AM</div>
           <div>
-            <div class="author-name">Arjun Mehta</div>
-            <div class="author-title">Designer</div>
+            <div class="testi-name">Arjun Mehta</div>
+            <div class="testi-role">Multi-Store Owner, Surat</div>
           </div>
         </div>
       </div>
@@ -1363,103 +1617,141 @@
   <!-- CTA -->
   <section class="cta" id="contact">
     <div class="cta-inner reveal">
-      <span class="section-tag">Ready?</span>
-      <h2>Experience Shreeji<br>Today.</h2>
-      <p>Join thousands who've made the switch. Your next phone is waiting.</p>
-      <a href="#products" class="btn-primary">Shop Now</a>
+      <span class="section-tag tag-orange">Ready?</span>
+      <h2 class="section-title" style="margin-bottom: 16px;">Join the Shreeji<br>Family Today.</h2>
+      <p>Whether you're looking for the perfect phone or the perfect business opportunity — we've got you covered.</p>
+      <div class="cta-buttons">
+        <a href="#stores" class="btn-primary">Find a Store Near You</a>
+        <a href="#franchise" class="btn-secondary">Start a Franchise →</a>
+      </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-top">
-      <div>
-        <div class="footer-brand">shreeji<span> mobile</span></div>
-        <p class="footer-tagline">Premium smartphones engineered with precision. Based in India, built for the world.</p>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand-block">
+          <a href="#" class="nav-logo" style="margin-bottom: 14px;">
+            <div class="logo-icon">SM</div>
+            <div class="logo-text">shreeji <span>mobile</span></div>
+          </a>
+          <p class="footer-tagline">India's fastest growing mobile retail franchise. 500+ stores, 50+ brands, one mission — the right phone for everyone.</p>
+          <div class="footer-socials">
+            <a href="#" title="Instagram">IG</a>
+            <a href="#" title="Twitter">𝕏</a>
+            <a href="#" title="YouTube">YT</a>
+            <a href="#" title="LinkedIn">in</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About Us</a>
+          <a href="#">Our Story</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+        </div>
+        <div class="footer-col">
+          <h4>Franchise</h4>
+          <a href="#">Apply Now</a>
+          <a href="#">Investment</a>
+          <a href="#">Success Stories</a>
+          <a href="#">FAQs</a>
+        </div>
+        <div class="footer-col">
+          <h4>Customers</h4>
+          <a href="#">Find a Store</a>
+          <a href="#">Offers & Deals</a>
+          <a href="#">Exchange</a>
+          <a href="#">EMI Plans</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="#">Help Center</a>
+          <a href="#">Warranty</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Service Centers</a>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>Products</h4>
-        <a href="#">Shreeji S1 Pro</a>
-        <a href="#">Shreeji A5</a>
-        <a href="#">Shreeji E1</a>
-        <a href="#">Accessories</a>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="#">About Us</a>
-        <a href="#">Careers</a>
-        <a href="#">Press</a>
-        <a href="#">Contact</a>
-      </div>
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="#">Help Center</a>
-        <a href="#">Warranty</a>
-        <a href="#">Returns</a>
-        <a href="#">Service Centers</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span class="footer-copy">&copy; 2026 Shreeji Mobile. All rights reserved.</span>
-      <div class="footer-socials">
-        <a href="#" title="Twitter">𝕏</a>
-        <a href="#" title="Instagram">IG</a>
-        <a href="#" title="YouTube">YT</a>
-        <a href="#" title="LinkedIn">in</a>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2026 Shreeji Mobile Pvt. Ltd. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Franchise Agreement</a>
+        </div>
       </div>
     </div>
   </footer>
 
   <script>
-    // Live clock on hero phone
-    function updateClock() {
-      const now = new Date();
-      const h = now.getHours().toString().padStart(2, '0');
-      const m = now.getMinutes().toString().padStart(2, '0');
-      document.getElementById('heroTime').textContent = h + ':' + m;
+    // Cursor glow
+    const glow = document.getElementById('cursorGlow');
+    let glowActive = false;
+    document.addEventListener('mousemove', (e) => {
+      if (!glowActive) { glow.classList.add('active'); glowActive = true; }
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+    });
 
-      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-      document.getElementById('heroDate').textContent =
-        days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate();
-    }
-    updateClock();
-    setInterval(updateClock, 10000);
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('show');
+      document.body.style.overflow = mobileMenu.classList.contains('show') ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('show');
+        document.body.style.overflow = '';
+      });
+    });
 
     // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Navbar background on scroll
+    // Animated counters
+    function animateCounter(el) {
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const isDecimal = el.dataset.decimal === 'true';
+      const duration = 2000;
+      const start = performance.now();
+
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = isDecimal ? (eased * target).toFixed(1) : Math.floor(eased * target);
+        el.textContent = current + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    // Counter observer
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('[data-target]').forEach(animateCounter);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.hero-counter, .stats-grid').forEach(el => counterObserver.observe(el));
+
+    // Nav style on scroll
     window.addEventListener('scroll', () => {
       const nav = document.querySelector('nav');
-      if (window.scrollY > 60) {
-        nav.style.background = 'rgba(10,10,10,0.95)';
-      } else {
-        nav.style.background = 'rgba(10,10,10,0.85)';
-      }
-    });
-
-    // Mobile hamburger menu
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-      hamburger.classList.toggle('active');
-    });
-    // Close menu when a nav link is clicked
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('show');
-        hamburger.classList.remove('active');
-      });
+      nav.style.background = window.scrollY > 60 ? 'rgba(5,5,5,0.95)' : 'rgba(5,5,5,0.8)';
     });
   </script>
 </body>

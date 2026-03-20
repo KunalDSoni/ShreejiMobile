@@ -1,51 +1,53 @@
-# Shreeji Mobile — Website
+# Shreeji Mobile — India's #1 Mobile Retail Franchise
 
-A premium, single-page website for **Shreeji Mobile**, a smartphone company. Inspired by the design aesthetics of [Nothing Tech](https://in.nothing.tech/) and [Apple](https://www.apple.com/).
+A premium, single-page website for **Shreeji Mobile**, India's fastest growing mobile phone retail franchise chain. Inspired by the design aesthetics of [Nothing Tech](https://in.nothing.tech/) and [Apple](https://www.apple.com/).
 
 ## Live Preview
 
 Open `shreeji-mobile.html` in any modern browser.
 
-## Design Inspiration
+## Concept
 
-| Element | Inspired By |
-|---|---|
-| Dot-grid background, monospace accents | Nothing Tech |
-| Frosted glass navbar, centered hero | Apple |
-| Dark/light section alternation | Both |
-| Product card layout with CTAs | Apple |
-| Bold typography & gradient text | Nothing Tech |
+Shreeji Mobile is a **franchise-based mobile retail chain** (like McDonald's or Domino's, but for smartphones). The website serves two audiences: customers looking for phones and entrepreneurs looking to own a franchise.
 
 ## Sections
 
-- **Hero** — Gradient headline, animated phone mockup with live clock
-- **Products** — Three-tier lineup (S1 Pro, A5, E1) with pricing
-- **Specs** — 8 key specifications in an icon grid
-- **Features** — Camera, battery, and performance deep-dives
-- **Testimonials** — Customer reviews
-- **CTA** — Call-to-action banner
-- **Footer** — Navigation links, social icons
+- **Hero** — Animated counters (500+ stores, 28 states, 50+ brands), brand marquee scroll
+- **What We Offer** — 6 service cards (multi-brand, pricing, warranty, EMI, accessories, service)
+- **Brands** — Authorized retailer grid (Apple, Samsung, OnePlus, Vivo, Realme, Xiaomi)
+- **Stats** — Animated number counters with scroll-triggered animation
+- **Franchise** — 4-step franchise process with store mockup visual and investment badge
+- **Store Locator** — City-wise store directory with pulsing location pins
+- **Testimonials** — Reviews from both franchise owners and customers
+- **CTA** — Dual call-to-action (Find Store / Start Franchise)
+- **Footer** — 5-column layout with legal links
+
+## Design Highlights
+
+| Element | Inspired By |
+|---|---|
+| Cursor glow follow effect | Nothing Tech |
+| Frosted glass navbar, clean typography | Apple |
+| Dark theme with orange accent | Custom brand identity |
+| Animated counters & scroll reveals | Both |
+| Brand marquee infinite scroll | Modern SaaS sites |
+| Monospace tags & pill badges | Nothing Tech |
 
 ## Tech Stack
 
-- Pure HTML, CSS, and vanilla JavaScript (no frameworks)
+- Pure HTML, CSS, and vanilla JavaScript — no frameworks or dependencies
 - Google Fonts: Inter + JetBrains Mono
-- CSS custom properties for theming
-- IntersectionObserver for scroll-reveal animations
+- CSS custom properties for full theming
+- IntersectionObserver for scroll-triggered animations
+- Animated number counters with easing
+- Cursor-following glow effect
+- Infinite brand marquee
+- Mobile menu overlay with body scroll lock
 - Fully responsive (1024px → 768px → 390px breakpoints)
-- Mobile menu overlay with animated hamburger icon
-
-## Responsive Breakpoints
-
-| Breakpoint | Target |
-|---|---|
-| > 1024px | Desktop |
-| ≤ 1024px | Tablet |
-| ≤ 768px | Mobile |
-| ≤ 390px | Small phones |
 
 ## Brand
 
-- **Company:** Shreeji Mobile
-- **Tagline:** Engineered for You
-- **Colors:** Dark (#0a0a0a), Blue (#2997ff), Green (#30d158), Purple (#bf5af2), Orange (#ff9f0a)
+- **Company:** Shreeji Mobile Pvt. Ltd.
+- **Tagline:** India's #1 Mobile Retail Franchise
+- **Primary Color:** Orange (#ff6b2c)
+- **Accent Colors:** Blue (#2997ff), Green (#30d158), Purple (#bf5af2), Yellow (#ffd60a)
