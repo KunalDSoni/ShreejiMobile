@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://kunaldsoni.github.io/ShreejiMobile/shreeji-mobile.html">🌐 Live Website</a> &nbsp;·&nbsp;
+  <a href="https://kunaldsoni.github.io/ShreejiMobile/">🌐 Live Website</a> &nbsp;·&nbsp;
   <a href="#franchise">🏪 Own a Franchise</a> &nbsp;·&nbsp;
   <a href="#features">✨ Features</a>
 </p>
@@ -34,7 +34,7 @@
 
 ## 🌐 Live Demo
 
-**👉 [https://kunaldsoni.github.io/ShreejiMobile/shreeji-mobile.html](https://kunaldsoni.github.io/ShreejiMobile/shreeji-mobile.html)**
+**👉 [https://kunaldsoni.github.io/ShreejiMobile/](https://kunaldsoni.github.io/ShreejiMobile/)**
 
 ---
 
@@ -128,7 +128,7 @@ Fully responsive with 3 breakpoints:
 git clone https://github.com/KunalDSoni/ShreejiMobile.git
 
 # Open in browser
-open ShreejiMobile/shreeji-mobile.html
+open ShreejiMobile/index.html
 ```
 
 No build tools, no dependencies, no setup. Just open and go.
@@ -139,8 +139,8 @@ No build tools, no dependencies, no setup. Just open and go.
 
 ```
 ShreejiMobile/
-├── shreeji-mobile.html   # Complete website (single file)
-└── README.md             # This file
+├── index.html   # Complete website (single file)
+└── README.md    # This file
 ```
 
 ---
