@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shreeji Mobile — Engineered for You</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-light: #f5f5f7;
+      --bg-card: #1a1a1a;
+      --text-primary: #ffffff;
+      --text-secondary: #86868b;
+      --text-dark: #1d1d1f;
+      --accent: #2997ff;
+      --accent-green: #30d158;
+      --accent-orange: #ff9f0a;
+      --accent-purple: #bf5af2;
+      --accent-red: #ff453a;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== DOT GRID BACKGROUND ========== */
+    .dot-grid {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* ========== NAVBAR ========== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0 48px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+
+    .nav-cta {
+      background: var(--text-primary);
+      color: var(--bg-dark);
+      padding: 8px 20px;
+      border-radius: 980px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
+
+    /* Mobile menu */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text-primary);
+      transition: 0.3s;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      overflow: hidden;
+    }
+
+    .hero-badge {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 10vw, 7.5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -4px;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 50%, var(--accent-red) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 500px;
+      line-height: 1.5;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 980px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover { background: #0077ed; transform: scale(1.03); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      padding: 14px 32px;
+      border-radius: 980px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid rgba(41,151,255,0.4);
+      transition: all 0.3s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); background: rgba(41,151,255,0.08); }
+
+    /* Hero phone mockup */
+    .hero-phone {
+      position: relative;
+      margin-top: 60px;
+      width: 280px;
+      height: 560px;
+      background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      border-radius: 40px;
+      border: 3px solid rgba(255,255,255,0.1);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.05),
+        0 25px 80px rgba(0,0,0,0.5),
+        0 0 120px rgba(41,151,255,0.1);
+      opacity: 0;
+      animation: fadeUp 1s 1s forwards;
+      overflow: hidden;
+    }
+    .hero-phone::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 28px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 2;
+    }
+    .hero-phone::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, rgba(41,151,255,0.08) 0%, transparent 40%, rgba(191,90,242,0.05) 100%);
+      border-radius: 37px;
+    }
+
+    .phone-screen {
+      position: absolute;
+      inset: 8px;
+      border-radius: 32px;
+      background: linear-gradient(180deg, #0d1b2a 0%, #1b263b 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .phone-time {
+      font-size: 4rem;
+      font-weight: 200;
+      letter-spacing: -2px;
+      margin-bottom: 4px;
+    }
+    .phone-date {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .phone-glow {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(41,151,255,0.3), transparent 70%);
+      filter: blur(40px);
+    }
+
+    /* ========== PRODUCT SHOWCASE ========== */
+    .showcase {
+      position: relative;
+      z-index: 1;
+      padding: 120px 24px;
+    }
+
+    .showcase-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-tag {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--accent-green);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      position: relative;
+      background: var(--bg-card);
+      border-radius: 24px;
+      padding: 48px 40px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      border-color: rgba(255,255,255,0.12);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .product-card.featured {
+      grid-column: span 2;
+      background: linear-gradient(145deg, #1a1a2e 0%, #0d1b2a 100%);
+      min-height: 520px;
+      text-align: center;
+      align-items: center;
+    }
+
+    .card-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-orange);
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin-bottom: 8px;
+    }
+
+    .card-subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .card-price {
+      font-family: var(--mono);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .card-price small {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: gap 0.3s;
+    }
+    .card-cta:hover { gap: 10px; }
+    .card-cta svg { width: 16px; height: 16px; }
+
+    .card-visual {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-top: 24px;
+      position: relative;
+    }
+
+    .card-phone {
+      width: 160px;
+      height: 320px;
+      background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
+      border-radius: 24px;
+      border: 2px solid rgba(255,255,255,0.08);
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .card-phone::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 18px;
+      background: #000;
+      border-radius: 12px;
+    }
+    .card-phone.phone-blue {
+      background: linear-gradient(145deg, #1a3a5c, #0f2844);
+      box-shadow: 0 20px 60px rgba(41,151,255,0.15);
+    }
+    .card-phone.phone-green {
+      background: linear-gradient(145deg, #1a3c2a, #0f2818);
+      box-shadow: 0 20px 60px rgba(48,209,88,0.12);
+    }
+    .card-phone.phone-purple {
+      background: linear-gradient(145deg, #2a1a3e, #1a0f2e);
+      box-shadow: 0 20px 60px rgba(191,90,242,0.12);
+    }
+
+    .featured .card-phone {
+      width: 200px;
+      height: 400px;
+      border-radius: 32px;
+    }
+    .featured .card-phone::before {
+      width: 80px;
+      height: 22px;
+      top: 10px;
+    }
+
+    /* ========== SPECS SECTION (Light) ========== */
+    .specs {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      padding: 120px 24px;
+    }
+
+    .specs-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .specs .section-tag { color: var(--accent); }
+    .specs .section-title { color: var(--text-dark); }
+    .specs .section-subtitle { color: #6e6e73; }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      margin-top: 64px;
+    }
+
+    .spec-item {
+      text-align: center;
+      padding: 40px 20px;
+      background: #fff;
+      border-radius: 20px;
+      border: 1px solid rgba(0,0,0,0.06);
+      transition: all 0.3s;
+    }
+    .spec-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+
+    .spec-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 1.5rem;
+    }
+    .spec-icon.blue { background: rgba(41,151,255,0.1); color: var(--accent); }
+    .spec-icon.green { background: rgba(48,209,88,0.1); color: var(--accent-green); }
+    .spec-icon.purple { background: rgba(191,90,242,0.1); color: var(--accent-purple); }
+    .spec-icon.orange { background: rgba(255,159,10,0.1); color: var(--accent-orange); }
+
+    .spec-value {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .spec-label {
+      font-size: 0.85rem;
+      color: #6e6e73;
+      font-weight: 400;
+    }
+
+    /* ========== FEATURES SECTION ========== */
+    .features {
+      position: relative;
+      z-index: 1;
+      padding: 120px 24px;
+    }
+
+    .features-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-bottom: 120px;
+    }
+    .feature-row:last-child { margin-bottom: 0; }
+    .feature-row.reverse { direction: rtl; }
+    .feature-row.reverse > * { direction: ltr; }
+
+    .feature-visual {
+      position: relative;
+      height: 400px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-visual .camera-module {
+      width: 120px;
+      height: 120px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
+      border: 2px solid rgba(255,255,255,0.08);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 16px;
+      position: relative;
+    }
+    .lens {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #4a4a6a, #1a1a2e);
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+    .lens-glow {
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(circle, rgba(41,151,255,0.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    .feature-visual .battery-visual {
+      width: 200px;
+      height: 100px;
+      border-radius: 16px;
+      border: 3px solid rgba(48,209,88,0.4);
+      padding: 6px;
+      position: relative;
+    }
+    .battery-visual::after {
+      content: '';
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 30px;
+      background: rgba(48,209,88,0.4);
+      border-radius: 0 4px 4px 0;
+    }
+    .battery-fill {
+      height: 100%;
+      width: 85%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--accent-green), #34c759);
+      animation: batteryPulse 3s infinite;
+    }
+
+    .feature-visual .chip-visual {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
+      border-radius: 16px;
+      border: 1px solid rgba(191,90,242,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent-purple);
+      letter-spacing: 1px;
+      position: relative;
+    }
+    .chip-visual::before, .chip-visual::after {
+      content: '';
+      position: absolute;
+      background: rgba(191,90,242,0.2);
+    }
+    .chip-visual::before {
+      width: 140%;
+      height: 1px;
+      top: 50%;
+    }
+    .chip-visual::after {
+      width: 1px;
+      height: 140%;
+      left: 50%;
+    }
+
+    .feature-content .section-tag { text-align: left; }
+
+    .feature-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .feature-desc {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .feature-list li::before {
+      content: '→';
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ========== TESTIMONIALS ========== */
+    .testimonials {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      padding: 120px 24px;
+    }
+
+    .testimonials .section-tag { color: var(--accent-purple); }
+    .testimonials .section-title { color: var(--text-dark); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1120px;
+      margin: 64px auto 0;
+    }
+
+    .testimonial-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 36px;
+      border: 1px solid rgba(0,0,0,0.06);
+      transition: all 0.3s;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+
+    .stars {
+      color: var(--accent-orange);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #1d1d1f;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: #fff;
+    }
+    .author-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+    }
+    .author-title {
+      font-size: 0.75rem;
+      color: #6e6e73;
+    }
+
+    /* ========== CTA SECTION ========== */
+    .cta {
+      position: relative;
+      z-index: 1;
+      padding: 120px 24px;
+      text-align: center;
+    }
+
+    .cta-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(145deg, #1a1a2e, #0d1b2a);
+      border-radius: 32px;
+      padding: 80px 48px;
+      border: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-inner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 30%, rgba(41,151,255,0.06), transparent 50%),
+                  radial-gradient(circle at 70% 70%, rgba(191,90,242,0.06), transparent 50%);
+      pointer-events: none;
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -2px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .cta p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .cta .btn-primary { position: relative; }
+
+    /* ========== FOOTER ========== */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 64px 48px 32px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand {
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+    .footer-brand span { color: var(--accent); }
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--text-primary); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+    .footer-socials {
+      display: flex;
+      gap: 16px;
+    }
+    .footer-socials a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .footer-socials a:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes batteryPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== MOBILE MENU OVERLAY ========== */
+    .nav-links.show {
+      display: flex !important;
+      position: fixed;
+      inset: 0;
+      top: 56px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      background: rgba(10,10,10,0.97);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      z-index: 999;
+      padding: 40px 24px;
+      animation: menuFade 0.3s ease;
+    }
+    .nav-links.show li {
+      width: 100%;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-links.show li:last-child { border-bottom: none; }
+    .nav-links.show a {
+      display: block;
+      font-size: 1.2rem;
+      padding: 20px 0;
+      color: var(--text-primary);
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+    @keyframes menuFade {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hamburger animation */
+    .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+    .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+    /* ========== RESPONSIVE ========== */
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+      .product-grid { grid-template-columns: 1fr; }
+      .product-card.featured { grid-column: span 1; }
+      .specs-grid { grid-template-columns: repeat(2, 1fr); }
+      .feature-row { grid-template-columns: 1fr; gap: 40px; }
+      .feature-row.reverse { direction: ltr; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; height: 52px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-cta { display: none; }
+      .nav-logo { font-size: 0.95rem; }
+
+      .hero { padding: 90px 16px 48px; min-height: auto; }
+      .hero h1 { font-size: 3.2rem; letter-spacing: -2px; }
+      .hero-badge { font-size: 0.6rem; letter-spacing: 2px; margin-bottom: 16px; }
+      .hero-sub { font-size: 0.95rem; margin-bottom: 28px; }
+
+      .hero-phone {
+        width: 200px; height: 400px;
+        border-radius: 28px;
+        margin-top: 40px;
+      }
+      .hero-phone::before { width: 70px; height: 20px; border-radius: 12px; top: 10px; }
+      .phone-screen { inset: 6px; border-radius: 22px; }
+      .phone-time { font-size: 3rem; }
+      .phone-date { font-size: 0.75rem; }
+
+      .hero-buttons { flex-direction: column; align-items: stretch; gap: 12px; }
+      .btn-primary, .btn-secondary {
+        text-align: center;
+        padding: 16px 28px;
+        font-size: 0.95rem;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+
+      .showcase, .features, .cta { padding: 64px 16px; }
+      .showcase-header { margin-bottom: 48px; }
+      .section-title { font-size: 2rem; letter-spacing: -1px; }
+      .section-subtitle { font-size: 0.95rem; }
+      .section-tag { font-size: 0.6rem; letter-spacing: 2px; }
+
+      .product-card {
+        padding: 28px 20px;
+        min-height: 360px;
+        border-radius: 20px;
+      }
+      .product-card.featured { min-height: 400px; padding: 32px 24px; }
+      .card-title { font-size: 1.6rem; }
+      .card-subtitle { font-size: 0.9rem; }
+      .card-price { font-size: 1.5rem; }
+      .card-phone { width: 130px; height: 260px; border-radius: 20px; }
+      .card-phone::before { width: 50px; height: 14px; top: 6px; }
+      .featured .card-phone { width: 160px; height: 320px; border-radius: 24px; }
+      .featured .card-phone::before { width: 60px; height: 16px; top: 8px; }
+
+      .specs { padding: 64px 16px; }
+      .specs-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 40px; }
+      .spec-item { padding: 24px 12px; border-radius: 16px; }
+      .spec-icon { width: 44px; height: 44px; border-radius: 12px; margin-bottom: 14px; }
+      .spec-icon svg { width: 20px; height: 20px; }
+      .spec-value { font-size: 1.5rem; }
+      .spec-label { font-size: 0.75rem; }
+
+      .feature-row { gap: 28px; margin-bottom: 80px; }
+      .feature-visual { height: 240px; border-radius: 20px; }
+      .feature-title { font-size: 1.6rem; }
+      .feature-desc { font-size: 0.9rem; }
+      .feature-list li { font-size: 0.85rem; }
+      .camera-module { width: 100px; height: 100px; border-radius: 22px; padding: 12px; gap: 6px; }
+      .battery-visual { width: 160px; height: 80px; }
+      .chip-visual { width: 80px; height: 80px; font-size: 0.6rem; }
+
+      .testimonials { padding: 64px 16px; }
+      .testimonials-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
+      .testimonial-card { padding: 24px 20px; border-radius: 16px; }
+      .testimonial-text { font-size: 0.9rem; }
+      .stars { font-size: 0.8rem; margin-bottom: 12px; }
+
+      .cta-inner { padding: 48px 20px; border-radius: 24px; }
+      .cta h2 { font-size: 1.8rem; letter-spacing: -1px; }
+      .cta p { font-size: 0.95rem; }
+
+      footer { padding: 40px 16px 20px; }
+      .footer-top { grid-template-columns: 1fr; gap: 28px; }
+      .footer-brand { font-size: 0.95rem; }
+      .footer-tagline { font-size: 0.8rem; }
+      .footer-col h4 { font-size: 0.65rem; margin-bottom: 10px; }
+      .footer-col a { font-size: 0.8rem; margin-bottom: 8px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .footer-copy { font-size: 0.7rem; }
+    }
+
+    /* Small phones */
+    @media (max-width: 390px) {
+      .hero h1 { font-size: 2.6rem; letter-spacing: -1.5px; }
+      .hero-sub { font-size: 0.85rem; }
+      .hero-phone { width: 180px; height: 360px; border-radius: 24px; }
+      .phone-time { font-size: 2.5rem; }
+      .section-title { font-size: 1.7rem; }
+      .card-title { font-size: 1.4rem; }
+      .card-price { font-size: 1.3rem; }
+      .spec-value { font-size: 1.3rem; }
+      .feature-title { font-size: 1.4rem; }
+      .cta h2 { font-size: 1.5rem; }
+      .product-card { padding: 24px 16px; min-height: 320px; }
+      .featured .card-phone { width: 140px; height: 280px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dot-grid"></div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="#" class="nav-logo">shreeji<span> mobile</span></a>
+    <ul class="nav-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#specs">Specs</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#products" class="nav-cta">Shop Now</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-badge">Introducing Shreeji S1 Pro</span>
+    <h1>
+      <span class="gradient-text">Built</span><br>
+      Different.
+    </h1>
+    <p class="hero-sub">
+      Premium smartphones engineered with precision. Designed for those who demand more.
+    </p>
+    <div class="hero-buttons">
+      <a href="#products" class="btn-primary">Explore Models</a>
+      <a href="#specs" class="btn-secondary">View Specs</a>
+    </div>
+
+    <div class="hero-phone">
+      <div class="phone-screen">
+        <span class="phone-time" id="heroTime">09:41</span>
+        <span class="phone-date" id="heroDate">Thursday, March 20</span>
+        <div class="phone-glow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="showcase" id="products">
+    <div class="showcase-header reveal">
+      <span class="section-tag">Our Lineup</span>
+      <h2 class="section-title">Choose Your<br>Shreeji.</h2>
+      <p class="section-subtitle">Three phones. Three statements. One standard of excellence.</p>
+    </div>
+
+    <div class="product-grid">
+      <!-- Featured Card -->
+      <div class="product-card featured reveal">
+        <span class="card-label">Flagship</span>
+        <h3 class="card-title">Shreeji S1 Pro</h3>
+        <p class="card-subtitle">Our most powerful phone ever. Titanium build, 200MP camera, all-day battery.</p>
+        <div class="card-price">₹29,999 <small>starting</small></div>
+        <a href="#" class="card-cta">
+          Learn more
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="card-visual">
+          <div class="card-phone phone-blue"></div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="product-card reveal">
+        <span class="card-label" style="color: var(--accent-green)">Mid-Range</span>
+        <h3 class="card-title">Shreeji A5</h3>
+        <p class="card-subtitle">Everything you need. Nothing you don't. Clean design, powerful performance.</p>
+        <div class="card-price">₹17,999 <small>starting</small></div>
+        <a href="#" class="card-cta">
+          Learn more
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="card-visual">
+          <div class="card-phone phone-green"></div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="product-card reveal">
+        <span class="card-label" style="color: var(--accent-purple)">Essential</span>
+        <h3 class="card-title">Shreeji E1</h3>
+        <p class="card-subtitle">Premium feel at an accessible price. The perfect first smartphone.</p>
+        <div class="card-price">₹9,999 <small>starting</small></div>
+        <a href="#" class="card-cta">
+          Learn more
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="card-visual">
+          <div class="card-phone phone-purple"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECS -->
+  <section class="specs" id="specs">
+    <div class="specs-inner">
+      <div class="showcase-header reveal">
+        <span class="section-tag">S1 Pro Specs</span>
+        <h2 class="section-title">Numbers That<br>Speak.</h2>
+        <p class="section-subtitle">Every specification engineered for real-world performance.</p>
+      </div>
+
+      <div class="specs-grid">
+        <div class="spec-item reveal">
+          <div class="spec-icon blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+          </div>
+          <div class="spec-value">6.7"</div>
+          <div class="spec-label">AMOLED Display</div>
+        </div>
+        <div class="spec-item reveal">
+          <div class="spec-icon green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/></svg>
+          </div>
+          <div class="spec-value">5500</div>
+          <div class="spec-label">mAh Battery</div>
+        </div>
+        <div class="spec-item reveal">
+          <div class="spec-icon purple">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          </div>
+          <div class="spec-value">200MP</div>
+          <div class="spec-label">Main Camera</div>
+        </div>
+        <div class="spec-item reveal">
+          <div class="spec-icon orange">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div class="spec-value">120Hz</div>
+          <div class="spec-label">Refresh Rate</div>
+        </div>
+        <div class="spec-item reveal">
+          <div class="spec-icon blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+          </div>
+          <div class="spec-value">12GB</div>
+          <div class="spec-label">RAM</div>
+        </div>
+        <div class="spec-item reveal">
+          <div class="spec-icon green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73L13 2.27a2 2 0 0 0-2 0L4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div class="spec-value">256GB</div>
+          <div class="spec-label">Storage</div>
+        </div>
+        <div class="spec-item reveal">
+          <div class="spec-icon purple">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="spec-value">IP68</div>
+          <div class="spec-label">Water Resistant</div>
+        </div>
+        <div class="spec-item reveal">
+          <div class="spec-icon orange">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+          </div>
+          <div class="spec-value">5G</div>
+          <div class="spec-label">Connectivity</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="features-inner">
+      <div class="showcase-header reveal">
+        <span class="section-tag" style="color: var(--accent-purple)">Crafted with Care</span>
+        <h2 class="section-title">Why Shreeji?</h2>
+        <p class="section-subtitle">Every detail is designed with intention.</p>
+      </div>
+
+      <!-- Feature 1 -->
+      <div class="feature-row reveal">
+        <div class="feature-visual">
+          <div class="camera-module">
+            <div class="lens"></div>
+            <div class="lens"></div>
+            <div class="lens"></div>
+            <div class="lens" style="background: radial-gradient(circle at 35% 35%, #5a4a7a, #2a1a3e);"></div>
+            <div class="lens-glow"></div>
+          </div>
+        </div>
+        <div class="feature-content">
+          <span class="section-tag">Camera System</span>
+          <h3 class="feature-title">See the World<br>in 200MP.</h3>
+          <p class="feature-desc">Quad camera system with AI-powered night mode, 8K video recording, and pro-level computational photography.</p>
+          <ul class="feature-list">
+            <li>200MP main sensor with OIS</li>
+            <li>50MP ultrawide lens</li>
+            <li>12MP telephoto with 5x optical zoom</li>
+            <li>AI-enhanced night photography</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-row reverse reveal">
+        <div class="feature-visual">
+          <div class="battery-visual">
+            <div class="battery-fill"></div>
+          </div>
+        </div>
+        <div class="feature-content">
+          <span class="section-tag" style="color: var(--accent-green)">All-Day Battery</span>
+          <h3 class="feature-title">Power That<br>Keeps Up.</h3>
+          <p class="feature-desc">5500mAh battery with 67W fast charging. From 0 to 50% in just 15 minutes.</p>
+          <ul class="feature-list">
+            <li>5500mAh high-density cell</li>
+            <li>67W wired fast charging</li>
+            <li>15W wireless charging</li>
+            <li>Reverse wireless charging</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-row reveal">
+        <div class="feature-visual">
+          <div class="chip-visual">SM-1</div>
+        </div>
+        <div class="feature-content">
+          <span class="section-tag" style="color: var(--accent-orange)">Performance</span>
+          <h3 class="feature-title">Speed Without<br>Compromise.</h3>
+          <p class="feature-desc">Powered by the latest flagship chipset with 12GB RAM. Effortless multitasking, gaming, and productivity.</p>
+          <ul class="feature-list">
+            <li>Flagship octa-core processor</li>
+            <li>12GB LPDDR5X RAM</li>
+            <li>256GB UFS 4.0 storage</li>
+            <li>Advanced AI engine</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="reviews">
+    <div class="showcase-header reveal">
+      <span class="section-tag">What People Say</span>
+      <h2 class="section-title">Loved by<br>Thousands.</h2>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">The camera quality is unreal for this price point. Night mode photos look like they were taken on a flagship device costing twice as much.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">RK</div>
+          <div>
+            <div class="author-name">Rahul Kumar</div>
+            <div class="author-title">Tech Reviewer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">Battery life is a game changer. I go through an entire day of heavy use and still have 30% left. The fast charging is incredibly convenient.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">PS</div>
+          <div>
+            <div class="author-name">Priya Sharma</div>
+            <div class="author-title">Content Creator</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">Finally, a brand that understands design. The build quality and attention to detail rival phones that cost three times more.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AM</div>
+          <div>
+            <div class="author-name">Arjun Mehta</div>
+            <div class="author-title">Designer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <div class="cta-inner reveal">
+      <span class="section-tag">Ready?</span>
+      <h2>Experience Shreeji<br>Today.</h2>
+      <p>Join thousands who've made the switch. Your next phone is waiting.</p>
+      <a href="#products" class="btn-primary">Shop Now</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">shreeji<span> mobile</span></div>
+        <p class="footer-tagline">Premium smartphones engineered with precision. Based in India, built for the world.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <a href="#">Shreeji S1 Pro</a>
+        <a href="#">Shreeji A5</a>
+        <a href="#">Shreeji E1</a>
+        <a href="#">Accessories</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="#">Help Center</a>
+        <a href="#">Warranty</a>
+        <a href="#">Returns</a>
+        <a href="#">Service Centers</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Shreeji Mobile. All rights reserved.</span>
+      <div class="footer-socials">
+        <a href="#" title="Twitter">𝕏</a>
+        <a href="#" title="Instagram">IG</a>
+        <a href="#" title="YouTube">YT</a>
+        <a href="#" title="LinkedIn">in</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Live clock on hero phone
+    function updateClock() {
+      const now = new Date();
+      const h = now.getHours().toString().padStart(2, '0');
+      const m = now.getMinutes().toString().padStart(2, '0');
+      document.getElementById('heroTime').textContent = h + ':' + m;
+
+      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      document.getElementById('heroDate').textContent =
+        days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate();
+    }
+    updateClock();
+    setInterval(updateClock, 10000);
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Navbar background on scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 60) {
+        nav.style.background = 'rgba(10,10,10,0.95)';
+      } else {
+        nav.style.background = 'rgba(10,10,10,0.85)';
+      }
+    });
+
+    // Mobile hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      hamburger.classList.toggle('active');
+    });
+    // Close menu when a nav link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('show');
+        hamburger.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
