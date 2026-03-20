@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
+  <script>
+    // Prevent flash: set theme before CSS renders
+    (function() {
+      var saved = localStorage.getItem('sm-theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shreeji Mobile — India's Fastest Growing Mobile Franchise</title>
+  <title>Shreeji Mobile — Gujarat's Fastest Growing Mobile Franchise</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg-dark: #050505;
-      --bg-surface: #0e0e0e;
-      --bg-card: #151515;
-      --bg-card-hover: #1c1c1c;
-      --bg-light: #f5f5f7;
-      --text-primary: #ffffff;
-      --text-secondary: #86868b;
-      --text-dark: #1d1d1f;
       --accent: #ff6b2c;
       --accent-glow: rgba(255,107,44,0.15);
       --accent-blue: #2997ff;
@@ -28,14 +28,75 @@
       --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
+    /* ===== DARK THEME (default) ===== */
+    [data-theme="dark"] {
+      --bg-body: #050505;
+      --bg-surface: #0e0e0e;
+      --bg-card: #151515;
+      --bg-card-hover: #1c1c1c;
+      --text-primary: #ffffff;
+      --text-secondary: #86868b;
+      --border-subtle: rgba(255,255,255,0.04);
+      --border-hover: rgba(255,255,255,0.08);
+      --nav-bg: rgba(5,5,5,0.8);
+      --nav-bg-scroll: rgba(5,5,5,0.95);
+      --menu-bg: rgba(5,5,5,0.97);
+      --marquee-color: rgba(255,255,255,0.12);
+      --marquee-hover: rgba(255,255,255,0.3);
+      --marquee-dot: rgba(255,255,255,0.08);
+      --hero-bg-text: rgba(255,255,255,0.015);
+      --card-top-line: rgba(255,107,44,0.3);
+      --testi-text: rgba(255,255,255,0.75);
+      --city-card-bg: rgba(255,255,255,0.03);
+      --city-card-hover-bg: rgba(255,107,44,0.05);
+      --cta-bg: linear-gradient(145deg, #1a0e05, #0d0804);
+      --store-bg: linear-gradient(145deg, #1a1008, #0d0804);
+      --hamburger-color: #ffffff;
+      --btn-secondary-color: #ffffff;
+      --btn-secondary-border: rgba(255,255,255,0.15);
+      --btn-secondary-border-hover: rgba(255,255,255,0.4);
+      --btn-secondary-bg-hover: rgba(255,255,255,0.04);
+    }
+
+    /* ===== LIGHT THEME ===== */
+    [data-theme="light"] {
+      --bg-body: #ffffff;
+      --bg-surface: #f5f5f7;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f9f9f9;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --border-subtle: rgba(0,0,0,0.06);
+      --border-hover: rgba(0,0,0,0.12);
+      --nav-bg: rgba(255,255,255,0.85);
+      --nav-bg-scroll: rgba(255,255,255,0.95);
+      --menu-bg: rgba(255,255,255,0.97);
+      --marquee-color: rgba(0,0,0,0.08);
+      --marquee-hover: rgba(0,0,0,0.2);
+      --marquee-dot: rgba(0,0,0,0.06);
+      --hero-bg-text: rgba(0,0,0,0.025);
+      --card-top-line: rgba(255,107,44,0.4);
+      --testi-text: rgba(29,29,31,0.8);
+      --city-card-bg: rgba(0,0,0,0.02);
+      --city-card-hover-bg: rgba(255,107,44,0.05);
+      --cta-bg: linear-gradient(145deg, #fff5ef, #fff0e8);
+      --store-bg: linear-gradient(145deg, #fef7f2, #fdf0e8);
+      --hamburger-color: #1d1d1f;
+      --btn-secondary-color: #1d1d1f;
+      --btn-secondary-border: rgba(0,0,0,0.15);
+      --btn-secondary-border-hover: rgba(0,0,0,0.4);
+      --btn-secondary-bg-hover: rgba(0,0,0,0.04);
+    }
+
     html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
       font-family: var(--sans);
-      background: var(--bg-dark);
+      background: var(--bg-body);
       color: var(--text-primary);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      transition: background 0.3s, color 0.3s;
     }
 
     /* ========== CURSOR GLOW ========== */
@@ -65,10 +126,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(5,5,5,0.8);
+      background: var(--nav-bg);
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background 0.3s;
     }
 
     .nav-logo {
@@ -165,7 +227,7 @@
       display: block;
       width: 22px;
       height: 1.5px;
-      background: var(--text-primary);
+      background: var(--hamburger-color);
       transition: 0.3s;
     }
     .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
@@ -178,7 +240,7 @@
       position: fixed;
       inset: 0;
       top: 60px;
-      background: rgba(5,5,5,0.97);
+      background: var(--menu-bg);
       backdrop-filter: blur(24px);
       z-index: 999;
       flex-direction: column;
@@ -198,7 +260,7 @@
       color: var(--text-primary);
       text-decoration: none;
       padding: 20px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid var(--border-subtle);
       transition: color 0.2s;
     }
     .mobile-menu a:last-child { border-bottom: none; }
@@ -249,7 +311,7 @@
       position: absolute;
       font-size: clamp(8rem, 22vw, 18rem);
       font-weight: 900;
-      color: rgba(255,255,255,0.015);
+      color: var(--hero-bg-text);
       letter-spacing: -8px;
       white-space: nowrap;
       pointer-events: none;
@@ -356,16 +418,16 @@
 
     .btn-secondary {
       background: transparent;
-      color: var(--text-primary);
+      color: var(--btn-secondary-color);
       padding: 15px 36px;
       border-radius: 980px;
       font-size: 0.95rem;
       font-weight: 600;
       text-decoration: none;
-      border: 1.5px solid rgba(255,255,255,0.15);
+      border: 1.5px solid var(--btn-secondary-border);
       transition: all 0.3s;
     }
-    .btn-secondary:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.04); }
+    .btn-secondary:hover { border-color: var(--btn-secondary-border-hover); background: var(--btn-secondary-bg-hover); }
 
     /* Brand logos scroll */
     .brand-marquee {
@@ -385,34 +447,34 @@
       z-index: 2;
       pointer-events: none;
     }
-    .brand-marquee::before { left: 0; background: linear-gradient(90deg, var(--bg-dark), transparent); }
-    .brand-marquee::after { right: 0; background: linear-gradient(90deg, transparent, var(--bg-dark)); }
+    .brand-marquee::before { left: 0; background: linear-gradient(90deg, var(--bg-body), transparent); }
+    .brand-marquee::after { right: 0; background: linear-gradient(90deg, transparent, var(--bg-body)); }
 
     .marquee-track {
       display: flex;
-      gap: 60px;
+      gap: 56px;
       align-items: center;
-      animation: marquee 25s linear infinite;
+      animation: marquee 28s linear infinite;
       width: max-content;
     }
-    .marquee-brand {
-      font-family: var(--sans);
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: rgba(255,255,255,0.12);
-      white-space: nowrap;
-      letter-spacing: -0.5px;
-      transition: color 0.3s;
+    .marquee-item {
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      opacity: 0.35;
+      transition: opacity 0.3s, transform 0.3s;
     }
-    .marquee-brand:hover { color: rgba(255,255,255,0.3); }
-    .marquee-dot {
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.08);
-      flex-shrink: 0;
+    .marquee-item:hover { opacity: 0.75; transform: scale(1.08); }
+    .marquee-item img {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
     }
+    /* Make logos white on dark, black on light */
+    [data-theme="dark"] .marquee-item img { filter: brightness(0) invert(1); }
+    [data-theme="light"] .marquee-item img { filter: brightness(0); }
 
     @keyframes marquee {
       0% { transform: translateX(0); }
@@ -479,7 +541,7 @@
       background: var(--bg-card);
       border-radius: 24px;
       padding: 40px 32px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
       transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
       position: relative;
       overflow: hidden;
@@ -491,14 +553,14 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,107,44,0.3), transparent);
+      background: linear-gradient(90deg, transparent, var(--card-top-line), transparent);
       opacity: 0;
       transition: opacity 0.4s;
     }
     .offer-card:hover {
       background: var(--bg-card-hover);
       transform: translateY(-4px);
-      border-color: rgba(255,255,255,0.08);
+      border-color: var(--border-hover);
     }
     .offer-card:hover::before { opacity: 1; }
 
@@ -556,22 +618,29 @@
       border-radius: 20px;
       padding: 36px 20px;
       text-align: center;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
       transition: all 0.3s;
       cursor: pointer;
     }
     .brand-card:hover {
-      border-color: rgba(255,255,255,0.1);
+      border-color: var(--border-hover);
       background: var(--bg-card-hover);
       transform: translateY(-3px);
     }
 
-    .brand-logo {
-      font-size: 1.6rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-      letter-spacing: -0.5px;
+    .brand-logo-img {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+      margin-bottom: 12px;
+      transition: transform 0.3s;
     }
+    .brand-card:hover .brand-logo-img { transform: scale(1.08); }
+    /* Keep original colors by default, but allow theme override */
+    [data-theme="dark"] .brand-logo-img.mono { filter: brightness(0) invert(1); opacity: 0.7; }
+    [data-theme="light"] .brand-logo-img.mono { filter: brightness(0); opacity: 0.7; }
+    .brand-card:hover .brand-logo-img.mono { opacity: 1; }
+
     .brand-card .brand-sub {
       font-size: 0.7rem;
       color: var(--text-secondary);
@@ -579,13 +648,6 @@
       letter-spacing: 1px;
       text-transform: uppercase;
     }
-
-    .bl-apple { color: #a8a8a8; }
-    .bl-samsung { color: #1428a0; }
-    .bl-oneplus { color: #f5010c; }
-    .bl-vivo { color: #415fff; }
-    .bl-realme { color: #ffc800; }
-    .bl-xiaomi { color: #ff6900; }
 
     /* ========== WHY FRANCHISE (STATS) ========== */
     .stats {
@@ -611,7 +673,7 @@
       border-radius: 24px;
       padding: 40px 28px;
       text-align: center;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
       position: relative;
       overflow: hidden;
       transition: all 0.3s;
@@ -672,7 +734,7 @@
     .franchise-visual {
       background: var(--bg-card);
       border-radius: 28px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
       padding: 48px;
       position: relative;
       overflow: hidden;
@@ -689,7 +751,7 @@
       position: relative;
       width: 100%;
       aspect-ratio: 16/10;
-      background: linear-gradient(145deg, #1a1008, #0d0804);
+      background: var(--store-bg);
       border-radius: 16px;
       border: 1px solid rgba(255,107,44,0.15);
       display: flex;
@@ -726,26 +788,64 @@
       padding: 16px;
     }
     .store-phone-slot {
-      background: rgba(255,255,255,0.03);
+      background: var(--city-card-bg);
       border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 10px;
     }
     .mini-phone {
-      width: 28px;
-      height: 52px;
-      border-radius: 6px;
-      border: 1.5px solid rgba(255,255,255,0.1);
+      width: 48px;
+      height: 88px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(255,255,255,0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    .mp-1 { background: linear-gradient(145deg, #1a2a4a, #0d1522); }
-    .mp-2 { background: linear-gradient(145deg, #2a1a3e, #150d22); }
-    .mp-3 { background: linear-gradient(145deg, #1a3a2a, #0d2215); }
-    .mp-4 { background: linear-gradient(145deg, #3a2a1a, #22150d); }
-    .mp-5 { background: linear-gradient(145deg, #3a1a2a, #220d15); }
-    .mp-6 { background: linear-gradient(145deg, #1a3a3a, #0d2222); }
+    .mini-phone::before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 2.5px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.15);
+    }
+    .mini-phone img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.7;
+    }
+    /* Keep mini-phone logos white even in light theme — dark phone on light shelf */
+    [data-theme="light"] .mini-phone img { filter: none; opacity: 0.7; }
+    .mini-phone .mp-label {
+      font-family: var(--mono);
+      font-size: 0.3rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      line-height: 1;
+    }
+    [data-theme="light"] .mini-phone .mp-label { color: rgba(0,0,0,0.35); }
+    .mp-1 { background: linear-gradient(180deg, #1c1c1e, #000); }
+    .mp-2 { background: linear-gradient(180deg, #0a1a3a, #050d1a); }
+    .mp-3 { background: linear-gradient(180deg, #1a0000, #0d0000); border-color: rgba(245,1,12,0.2); }
+    .mp-4 { background: linear-gradient(180deg, #0a0a2a, #05051a); border-color: rgba(65,95,255,0.2); }
+    .mp-5 { background: linear-gradient(180deg, #1a0a00, #0d0500); border-color: rgba(255,105,0,0.2); }
+    .mp-6 { background: linear-gradient(180deg, #111, #0a0a0a); }
 
     .store-badge {
       position: absolute;
@@ -832,7 +932,7 @@
     .locator-map {
       background: var(--bg-card);
       border-radius: 28px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
       padding: 48px;
       margin-top: 64px;
       position: relative;
@@ -847,15 +947,15 @@
     }
 
     .city-card {
-      background: rgba(255,255,255,0.03);
+      background: var(--city-card-bg);
       border-radius: 16px;
       padding: 24px 20px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
       transition: all 0.3s;
       cursor: pointer;
     }
     .city-card:hover {
-      background: rgba(255,107,44,0.05);
+      background: var(--city-card-hover-bg);
       border-color: rgba(255,107,44,0.15);
       transform: translateY(-2px);
     }
@@ -905,13 +1005,13 @@
       background: var(--bg-card);
       border-radius: 24px;
       padding: 36px 28px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
       transition: all 0.3s;
       position: relative;
     }
     .testi-card:hover {
       transform: translateY(-3px);
-      border-color: rgba(255,255,255,0.08);
+      border-color: var(--border-hover);
     }
 
     .testi-quote {
@@ -924,7 +1024,7 @@
     .testi-text {
       font-size: 0.92rem;
       line-height: 1.6;
-      color: rgba(255,255,255,0.75);
+      color: var(--testi-text);
       margin-bottom: 24px;
       font-weight: 300;
     }
@@ -980,7 +1080,7 @@
     .cta-inner {
       max-width: 900px;
       margin: 0 auto;
-      background: linear-gradient(145deg, #1a0e05, #0d0804);
+      background: var(--cta-bg);
       border-radius: 32px;
       padding: 80px 48px;
       border: 1px solid rgba(255,107,44,0.1);
@@ -1023,7 +1123,7 @@
     footer {
       position: relative;
       z-index: 1;
-      border-top: 1px solid rgba(255,255,255,0.04);
+      border-top: 1px solid var(--border-subtle);
       padding: 72px 48px 32px;
     }
     .footer-inner {
@@ -1054,7 +1154,7 @@
       width: 36px;
       height: 36px;
       border-radius: 10px;
-      background: rgba(255,255,255,0.04);
+      background: var(--city-card-bg);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1063,7 +1163,7 @@
       font-size: 0.8rem;
       font-weight: 600;
       transition: all 0.2s;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
     }
     .footer-socials a:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 
@@ -1091,7 +1191,7 @@
       justify-content: space-between;
       align-items: center;
       padding-top: 28px;
-      border-top: 1px solid rgba(255,255,255,0.04);
+      border-top: 1px solid var(--border-subtle);
     }
     .footer-copy {
       font-size: 0.72rem;
@@ -1108,6 +1208,55 @@
       transition: color 0.2s;
     }
     .footer-legal a:hover { color: var(--text-primary); }
+
+    /* ========== THEME TOGGLE ========== */
+    .theme-toggle {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .theme-toggle svg { width: 18px; height: 18px; transition: transform 0.3s; }
+    .theme-toggle:hover svg { transform: rotate(20deg); }
+    .theme-toggle .icon-sun { display: none; }
+    .theme-toggle .icon-moon { display: block; }
+    [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+    [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+    /* ========== LIGHT THEME OVERRIDES ========== */
+    [data-theme="light"] .cursor-glow { display: none; }
+    [data-theme="light"] .store-phone-slot { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.06); }
+    [data-theme="light"] .mini-phone { border-color: rgba(255,255,255,0.1); }
+    [data-theme="light"] .mini-phone .mp-label { color: rgba(255,255,255,0.5); }
+    [data-theme="light"] .mini-phone::before { background: rgba(255,255,255,0.15); }
+    [data-theme="light"] .store-mockup { background: linear-gradient(145deg, #1a1008, #0d0804); }
+    [data-theme="light"] .store-header { background: rgba(255,107,44,0.06); border-color: rgba(255,107,44,0.08); }
+    [data-theme="light"] .store-header span { color: var(--text-secondary); }
+    [data-theme="light"] .nav-franchise { border-color: rgba(255,107,44,0.25); }
+    [data-theme="light"] .offer-card { box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    [data-theme="light"] .brand-card { box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    [data-theme="light"] .stat-card { box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    [data-theme="light"] .testi-card { box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    [data-theme="light"] .cta-inner { border-color: rgba(255,107,44,0.15); box-shadow: 0 4px 30px rgba(255,107,44,0.06); }
+    [data-theme="light"] .locator-map { box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    [data-theme="light"] .franchise-visual { box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+
+    /* Franchise icon in nav */
+    .nav-franchise { display: inline-flex; align-items: center; gap: 6px; }
+    .nav-franchise svg { width: 14px; height: 14px; flex-shrink: 0; }
 
     /* ========== ANIMATIONS ========== */
     @keyframes fadeUp {
@@ -1140,8 +1289,10 @@
 
     @media (max-width: 768px) {
       nav { padding: 0 16px; height: 56px; }
-      .nav-links, .nav-actions { display: none; }
+      .nav-links { display: none; }
+      .nav-actions { display: none; }
       .nav-hamburger { display: flex; }
+      .mobile-theme-toggle { display: flex !important; }
       .nav-logo { font-size: 1rem; }
       .cursor-glow { display: none; }
 
@@ -1163,7 +1314,8 @@
         margin: 0 auto;
       }
       .brand-marquee { margin-top: 48px; }
-      .marquee-brand { font-size: 1.1rem; }
+      .marquee-track { gap: 36px; }
+      .marquee-item img { height: 20px; }
 
       .offer, .stats, .locator, .cta { padding: 72px 16px; }
       .franchise, .brands, .testimonials { padding: 72px 16px; }
@@ -1176,7 +1328,7 @@
 
       .brands-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
       .brand-card { padding: 24px 12px; border-radius: 14px; }
-      .brand-logo { font-size: 1.2rem; }
+      .brand-logo-img { height: 22px; }
 
       .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
       .stat-card { padding: 28px 20px; border-radius: 20px; }
@@ -1235,12 +1387,25 @@
       <li><a href="#reviews">Reviews</a></li>
     </ul>
     <div class="nav-actions">
-      <a href="#franchise" class="nav-franchise">Own a Franchise</a>
+      <a href="#franchise" class="nav-franchise">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Own a Franchise
+      </a>
       <a href="#stores" class="nav-cta">Find Store</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
     </div>
-    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle" aria-label="Toggle theme" style="display:none;">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
   <!-- MOBILE MENU -->
@@ -1251,7 +1416,10 @@
     <a href="#stores">Stores</a>
     <a href="#reviews">Reviews</a>
     <div class="mobile-cta-group">
-      <a href="#franchise" class="mcta-secondary">Own a Franchise</a>
+      <a href="#franchise" class="mcta-secondary">
+        <svg style="width:16px;height:16px;vertical-align:-2px;margin-right:6px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Own a Franchise
+      </a>
       <a href="#stores" class="mcta-primary">Find a Store</a>
     </div>
   </div>
@@ -1262,12 +1430,12 @@
 
     <div class="hero-counter">
       <div class="counter-item">
-        <div class="counter-value" data-target="500">0</div>
+        <div class="counter-value" data-target="120">0</div>
         <div class="counter-label">Stores</div>
       </div>
       <div class="counter-item">
-        <div class="counter-value" data-target="28">0</div>
-        <div class="counter-label">States</div>
+        <div class="counter-value" data-target="25">0</div>
+        <div class="counter-label">Districts</div>
       </div>
       <div class="counter-item">
         <div class="counter-value" data-target="50">0</div>
@@ -1275,7 +1443,7 @@
       </div>
     </div>
 
-    <div class="hero-tagline">India's #1 Mobile Retail Franchise</div>
+    <div class="hero-tagline">Gujarat's #1 Mobile Retail Franchise</div>
 
     <h1>
       Your Phone.<br>
@@ -1284,7 +1452,7 @@
     </h1>
 
     <p class="hero-sub">
-      From Apple to Xiaomi — walk into any Shreeji Mobile store and discover the perfect phone, with expert guidance and unbeatable deals. Want to own a store? We've got a franchise for that too.
+      From Apple to Xiaomi — walk into any Shreeji Mobile store across Gujarat and discover the perfect phone, with expert guidance and unbeatable deals. Want to own a store? We've got a franchise for that too.
     </p>
 
     <div class="hero-buttons">
@@ -1292,34 +1460,34 @@
       <a href="#franchise" class="btn-secondary">Start a Franchise →</a>
     </div>
 
-    <!-- Brand marquee -->
+    <!-- Brand marquee with real logos -->
     <div class="brand-marquee">
       <div class="marquee-track" id="marqueeTrack">
-        <span class="marquee-brand">Apple</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">Samsung</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">OnePlus</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">Vivo</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">Realme</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">Xiaomi</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">OPPO</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">Nothing</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">Google Pixel</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">Motorola</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">iQOO</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">POCO</span><span class="marquee-dot"></span>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/apple" alt="Apple" loading="lazy"></div>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/samsung" alt="Samsung" loading="lazy"></div>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/oneplus" alt="OnePlus" loading="lazy"></div>
+        <div class="marquee-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 28'%3E%3Ctext x='0' y='22' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-style='italic' font-size='24' fill='%23415FFF'%3Evivo%3C/text%3E%3C/svg%3E" alt="Vivo" loading="lazy"></div>
+        <div class="marquee-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 28'%3E%3Ctext x='0' y='22' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='24' fill='%23000'%3Erealme%3C/text%3E%3C/svg%3E" alt="Realme" loading="lazy"></div>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/xiaomi" alt="Xiaomi" loading="lazy"></div>
+        <div class="marquee-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 28'%3E%3Ctext x='0' y='22' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='24' fill='%23000'%3EOPPO%3C/text%3E%3C/svg%3E" alt="OPPO" loading="lazy"></div>
+        <div class="marquee-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 28'%3E%3Ctext x='0' y='22' font-family='monospace' font-weight='400' font-size='22' fill='%23000'%3ENothing.%3C/text%3E%3C/svg%3E" alt="Nothing" loading="lazy"></div>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/google" alt="Google Pixel" loading="lazy"></div>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/motorola" alt="Motorola" loading="lazy"></div>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/huawei" alt="Huawei" loading="lazy"></div>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/lenovo" alt="Lenovo" loading="lazy"></div>
         <!-- duplicate for seamless loop -->
-        <span class="marquee-brand">Apple</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">Samsung</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">OnePlus</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">Vivo</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">Realme</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">Xiaomi</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">OPPO</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">Nothing</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">Google Pixel</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">Motorola</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">iQOO</span><span class="marquee-dot"></span>
-        <span class="marquee-brand">POCO</span><span class="marquee-dot"></span>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/apple" alt="Apple" loading="lazy"></div>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/samsung" alt="Samsung" loading="lazy"></div>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/oneplus" alt="OnePlus" loading="lazy"></div>
+        <div class="marquee-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 28'%3E%3Ctext x='0' y='22' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-style='italic' font-size='24' fill='%23415FFF'%3Evivo%3C/text%3E%3C/svg%3E" alt="Vivo" loading="lazy"></div>
+        <div class="marquee-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 28'%3E%3Ctext x='0' y='22' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='24' fill='%23000'%3Erealme%3C/text%3E%3C/svg%3E" alt="Realme" loading="lazy"></div>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/xiaomi" alt="Xiaomi" loading="lazy"></div>
+        <div class="marquee-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 28'%3E%3Ctext x='0' y='22' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='24' fill='%23000'%3EOPPO%3C/text%3E%3C/svg%3E" alt="OPPO" loading="lazy"></div>
+        <div class="marquee-item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 28'%3E%3Ctext x='0' y='22' font-family='monospace' font-weight='400' font-size='22' fill='%23000'%3ENothing.%3C/text%3E%3C/svg%3E" alt="Nothing" loading="lazy"></div>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/google" alt="Google Pixel" loading="lazy"></div>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/motorola" alt="Motorola" loading="lazy"></div>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/huawei" alt="Huawei" loading="lazy"></div>
+        <div class="marquee-item"><img src="https://cdn.simpleicons.org/lenovo" alt="Lenovo" loading="lazy"></div>
       </div>
     </div>
   </section>
@@ -1379,27 +1547,27 @@
 
       <div class="brands-grid">
         <div class="brand-card reveal">
-          <div class="brand-logo bl-apple">Apple</div>
+          <img class="brand-logo-img" src="https://cdn.simpleicons.org/apple/999999" alt="Apple" loading="lazy">
           <div class="brand-sub">Premium Partner</div>
         </div>
         <div class="brand-card reveal reveal-delay-1">
-          <div class="brand-logo bl-samsung">Samsung</div>
+          <img class="brand-logo-img" src="https://cdn.simpleicons.org/samsung/1428A0" alt="Samsung" loading="lazy">
           <div class="brand-sub">Authorized Dealer</div>
         </div>
         <div class="brand-card reveal reveal-delay-1">
-          <div class="brand-logo bl-oneplus">OnePlus</div>
+          <img class="brand-logo-img" src="https://cdn.simpleicons.org/oneplus/F5010C" alt="OnePlus" loading="lazy">
           <div class="brand-sub">Exclusive Partner</div>
         </div>
         <div class="brand-card reveal reveal-delay-2">
-          <div class="brand-logo bl-vivo">vivo</div>
+          <img class="brand-logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 28'%3E%3Ctext x='0' y='22' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-style='italic' font-size='24' fill='%23415FFF'%3Evivo%3C/text%3E%3C/svg%3E" alt="Vivo" loading="lazy">
           <div class="brand-sub">Authorized Dealer</div>
         </div>
         <div class="brand-card reveal reveal-delay-2">
-          <div class="brand-logo bl-realme">realme</div>
+          <img class="brand-logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 28'%3E%3Ctext x='0' y='22' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='24' fill='%23FFC800'%3Erealme%3C/text%3E%3C/svg%3E" alt="Realme" loading="lazy">
           <div class="brand-sub">Official Partner</div>
         </div>
         <div class="brand-card reveal reveal-delay-3">
-          <div class="brand-logo bl-xiaomi">Xiaomi</div>
+          <img class="brand-logo-img" src="https://cdn.simpleicons.org/xiaomi/FF6900" alt="Xiaomi" loading="lazy">
           <div class="brand-sub">Preferred Retailer</div>
         </div>
       </div>
@@ -1412,17 +1580,17 @@
       <div class="section-header reveal">
         <span class="section-tag tag-green">The Numbers</span>
         <h2 class="section-title">Growing Faster Than<br>Any Other Chain.</h2>
-        <p class="section-subtitle">From 1 store to 500+ in 8 years. Here's what powers the Shreeji effect.</p>
+        <p class="section-subtitle">From 1 store to 120+ across Gujarat. Here's what powers the Shreeji effect.</p>
       </div>
 
       <div class="stats-grid">
         <div class="stat-card reveal">
-          <div class="stat-number" data-target="500" data-suffix="+">0</div>
-          <div class="stat-label">Franchise Stores<br>Across India</div>
+          <div class="stat-number" data-target="120" data-suffix="+">0</div>
+          <div class="stat-label">Franchise Stores<br>Across Gujarat</div>
         </div>
         <div class="stat-card reveal reveal-delay-1">
-          <div class="stat-number" data-target="28" data-suffix="">0</div>
-          <div class="stat-label">States &<br>Union Territories</div>
+          <div class="stat-number" data-target="25" data-suffix="+">0</div>
+          <div class="stat-label">Districts<br>Covered</div>
         </div>
         <div class="stat-card reveal reveal-delay-2">
           <div class="stat-number" data-target="10" data-suffix="L+">0</div>
@@ -1441,7 +1609,7 @@
     <div class="franchise-inner">
       <div class="section-header reveal">
         <span class="section-tag tag-orange">Own a Franchise</span>
-        <h2 class="section-title">Be Your Own Boss.<br>With India's Best Brand.</h2>
+        <h2 class="section-title">Be Your Own Boss.<br>With Gujarat's Best Brand.</h2>
       </div>
 
       <div class="franchise-layout">
@@ -1454,12 +1622,42 @@
               <span>shreeji-mobile-store.live</span>
             </div>
             <div class="store-body">
-              <div class="store-phone-slot"><div class="mini-phone mp-1"></div></div>
-              <div class="store-phone-slot"><div class="mini-phone mp-2"></div></div>
-              <div class="store-phone-slot"><div class="mini-phone mp-3"></div></div>
-              <div class="store-phone-slot"><div class="mini-phone mp-4"></div></div>
-              <div class="store-phone-slot"><div class="mini-phone mp-5"></div></div>
-              <div class="store-phone-slot"><div class="mini-phone mp-6"></div></div>
+              <div class="store-phone-slot">
+                <div class="mini-phone mp-1">
+                  <img src="https://cdn.simpleicons.org/apple/ffffff" alt="">
+                  <span class="mp-label">iPhone</span>
+                </div>
+              </div>
+              <div class="store-phone-slot">
+                <div class="mini-phone mp-2">
+                  <img src="https://cdn.simpleicons.org/samsung/ffffff" alt="">
+                  <span class="mp-label">Galaxy</span>
+                </div>
+              </div>
+              <div class="store-phone-slot">
+                <div class="mini-phone mp-3">
+                  <img src="https://cdn.simpleicons.org/oneplus/ffffff" alt="">
+                  <span class="mp-label">OnePlus</span>
+                </div>
+              </div>
+              <div class="store-phone-slot">
+                <div class="mini-phone mp-4">
+                  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 20'%3E%3Ctext x='2' y='16' font-family='Arial' font-weight='700' font-style='italic' font-size='18' fill='%23fff'%3Evivo%3C/text%3E%3C/svg%3E" alt="">
+                  <span class="mp-label">V40</span>
+                </div>
+              </div>
+              <div class="store-phone-slot">
+                <div class="mini-phone mp-5">
+                  <img src="https://cdn.simpleicons.org/xiaomi/ffffff" alt="">
+                  <span class="mp-label">Redmi</span>
+                </div>
+              </div>
+              <div class="store-phone-slot">
+                <div class="mini-phone mp-6">
+                  <img src="https://cdn.simpleicons.org/google/ffffff" alt="">
+                  <span class="mp-label">Pixel</span>
+                </div>
+              </div>
             </div>
           </div>
           <div class="store-badge">
@@ -1514,7 +1712,7 @@
     <div class="locator-inner">
       <div class="section-header reveal">
         <span class="section-tag tag-purple">Find Us</span>
-        <h2 class="section-title">500+ Stores.<br>Probably Near You.</h2>
+        <h2 class="section-title">120+ Stores.<br>Probably Near You.</h2>
         <p class="section-subtitle">Walk in, try any phone, and walk out with the best deal — guaranteed.</p>
       </div>
 
@@ -1522,43 +1720,43 @@
         <div class="map-grid">
           <div class="city-card">
             <div class="city-pin"></div>
-            <div class="city-name">Mumbai</div>
-            <div class="city-stores">42 stores</div>
-          </div>
-          <div class="city-card">
-            <div class="city-pin"></div>
-            <div class="city-name">Delhi NCR</div>
-            <div class="city-stores">38 stores</div>
-          </div>
-          <div class="city-card">
-            <div class="city-pin"></div>
-            <div class="city-name">Bangalore</div>
-            <div class="city-stores">31 stores</div>
-          </div>
-          <div class="city-card">
-            <div class="city-pin"></div>
             <div class="city-name">Ahmedabad</div>
-            <div class="city-stores">28 stores</div>
-          </div>
-          <div class="city-card">
-            <div class="city-pin"></div>
-            <div class="city-name">Hyderabad</div>
-            <div class="city-stores">25 stores</div>
-          </div>
-          <div class="city-card">
-            <div class="city-pin"></div>
-            <div class="city-name">Pune</div>
             <div class="city-stores">22 stores</div>
           </div>
           <div class="city-card">
             <div class="city-pin"></div>
-            <div class="city-name">Chennai</div>
-            <div class="city-stores">20 stores</div>
+            <div class="city-name">Surat</div>
+            <div class="city-stores">18 stores</div>
           </div>
           <div class="city-card">
             <div class="city-pin"></div>
-            <div class="city-name">Kolkata</div>
-            <div class="city-stores">18 stores</div>
+            <div class="city-name">Vadodara</div>
+            <div class="city-stores">14 stores</div>
+          </div>
+          <div class="city-card">
+            <div class="city-pin"></div>
+            <div class="city-name">Rajkot</div>
+            <div class="city-stores">12 stores</div>
+          </div>
+          <div class="city-card">
+            <div class="city-pin"></div>
+            <div class="city-name">Bhavnagar</div>
+            <div class="city-stores">8 stores</div>
+          </div>
+          <div class="city-card">
+            <div class="city-pin"></div>
+            <div class="city-name">Gandhinagar</div>
+            <div class="city-stores">7 stores</div>
+          </div>
+          <div class="city-card">
+            <div class="city-pin"></div>
+            <div class="city-name">Junagadh</div>
+            <div class="city-stores">6 stores</div>
+          </div>
+          <div class="city-card">
+            <div class="city-pin"></div>
+            <div class="city-name">Anand</div>
+            <div class="city-stores">5 stores</div>
           </div>
         </div>
       </div>
@@ -1581,7 +1779,7 @@
           <div class="testi-avatar ta-1">RV</div>
           <div>
             <div class="testi-name">Rajesh Verma</div>
-            <div class="testi-role">Franchise Owner, Jaipur</div>
+            <div class="testi-role">Franchise Owner, Rajkot</div>
           </div>
         </div>
       </div>
@@ -1594,7 +1792,7 @@
           <div class="testi-avatar ta-2">PS</div>
           <div>
             <div class="testi-name">Priya Singh</div>
-            <div class="testi-role">Customer, Mumbai</div>
+            <div class="testi-role">Customer, Ahmedabad</div>
           </div>
         </div>
       </div>
@@ -1607,7 +1805,7 @@
           <div class="testi-avatar ta-3">AM</div>
           <div>
             <div class="testi-name">Arjun Mehta</div>
-            <div class="testi-role">Multi-Store Owner, Surat</div>
+            <div class="testi-role">Multi-Store Owner, Vadodara</div>
           </div>
         </div>
       </div>
@@ -1636,7 +1834,7 @@
             <div class="logo-icon">SM</div>
             <div class="logo-text">shreeji <span>mobile</span></div>
           </a>
-          <p class="footer-tagline">India's fastest growing mobile retail franchise. 500+ stores, 50+ brands, one mission — the right phone for everyone.</p>
+          <p class="footer-tagline">Gujarat's fastest growing mobile retail franchise. 120+ stores, 50+ brands, one mission — the right phone for everyone.</p>
           <div class="footer-socials">
             <a href="#" title="Instagram">IG</a>
             <a href="#" title="Twitter">𝕏</a>
@@ -1685,7 +1883,37 @@
   </footer>
 
   <script>
-    // Cursor glow
+    // ===== THEME SYSTEM =====
+    function getSystemTheme() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+
+    // Init: check saved preference, else use system
+    const savedTheme = localStorage.getItem('sm-theme');
+    setTheme(savedTheme || getSystemTheme());
+
+    // Listen for system theme changes (auto-switch if no manual override)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('sm-theme')) {
+        setTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+
+    // Toggle buttons (desktop + mobile)
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      setTheme(next);
+      localStorage.setItem('sm-theme', next);
+    }
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    document.getElementById('mobileThemeToggle').addEventListener('click', toggleTheme);
+
+    // ===== CURSOR GLOW =====
     const glow = document.getElementById('cursorGlow');
     let glowActive = false;
     document.addEventListener('mousemove', (e) => {
@@ -1694,7 +1922,7 @@
       glow.style.top = e.clientY + 'px';
     });
 
-    // Mobile menu
+    // ===== MOBILE MENU =====
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     hamburger.addEventListener('click', () => {
@@ -1710,7 +1938,7 @@
       });
     });
 
-    // Scroll reveal
+    // ===== SCROLL REVEAL =====
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -1718,7 +1946,7 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Animated counters
+    // ===== ANIMATED COUNTERS =====
     function animateCounter(el) {
       const target = parseFloat(el.dataset.target);
       const suffix = el.dataset.suffix || '';
@@ -1737,7 +1965,6 @@
       requestAnimationFrame(tick);
     }
 
-    // Counter observer
     const counterObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1748,10 +1975,10 @@
     }, { threshold: 0.3 });
     document.querySelectorAll('.hero-counter, .stats-grid').forEach(el => counterObserver.observe(el));
 
-    // Nav style on scroll
+    // ===== NAV ON SCROLL =====
     window.addEventListener('scroll', () => {
       const nav = document.querySelector('nav');
-      nav.style.background = window.scrollY > 60 ? 'rgba(5,5,5,0.95)' : 'rgba(5,5,5,0.8)';
+      nav.style.background = window.scrollY > 60 ? 'var(--nav-bg-scroll)' : 'var(--nav-bg)';
     });
   </script>
 </body>
