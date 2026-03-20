@@ -1,34 +1,39 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/SHREEJI-MOBILE-ff6b2c?style=for-the-badge&labelColor=0a0a0a&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjZmY2YjJjIj48cmVjdCB4PSI1IiB5PSIyIiB3aWR0aD0iMTQiIGhlaWdodD0iMjAiIHJ4PSIyIiBzdHJva2U9IiNmZjZiMmMiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==" alt="Shreeji Mobile"/>
+  <img src="https://img.shields.io/badge/SHREEJI_MOBILE-FRANCHISE-ff6b2c?style=for-the-badge&labelColor=0a0a0a" alt="Shreeji Mobile Franchise"/>
 </p>
 
-<h1 align="center">Shreeji Mobile</h1>
+<h1 align="center">શ્રીજી મોબાઇલ ફ્રેન્ચાઇઝ<br><sub>Shreeji Mobile Franchise</sub></h1>
 
 <p align="center">
-  <strong>India's #1 Mobile Retail Franchise</strong><br>
-  <em>500+ Stores · 28 States · 50+ Brands · One Mission</em>
+  <strong>ગુજરાતની #1 મોબાઇલ રિટેલ ફ્રેન્ચાઇઝ</strong><br>
+  <em>120+ Stores · 25+ Districts · 50+ Brands · Dual Language (EN/GU)</em>
 </p>
 
 <p align="center">
   <a href="https://kunaldsoni.github.io/ShreejiMobile/">🌐 Live Website</a> &nbsp;·&nbsp;
-  <a href="#franchise">🏪 Own a Franchise</a> &nbsp;·&nbsp;
-  <a href="#features">✨ Features</a>
+  <a href="#-own-a-franchise">🏪 Own a Franchise</a> &nbsp;·&nbsp;
+  <a href="#-features">✨ Features</a> &nbsp;·&nbsp;
+  <a href="#-dual-language">🇮🇳 ગુજરાતી / English</a>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Built_With-HTML%20%7C%20CSS%20%7C%20JS-1a1a1a?style=flat-square" alt="Tech"/>
-  <img src="https://img.shields.io/badge/Responsive-Mobile_First-30d158?style=flat-square&labelColor=1a1a1a" alt="Responsive"/>
-  <img src="https://img.shields.io/badge/Stores-500+-ff6b2c?style=flat-square&labelColor=1a1a1a" alt="Stores"/>
+  <img src="https://img.shields.io/badge/Theme-Dark_%2B_Light-30d158?style=flat-square&labelColor=1a1a1a" alt="Theme"/>
+  <img src="https://img.shields.io/badge/Language-EN_%2B_GU-2997ff?style=flat-square&labelColor=1a1a1a" alt="Language"/>
+  <img src="https://img.shields.io/badge/Stores-120+-ff6b2c?style=flat-square&labelColor=1a1a1a" alt="Stores"/>
+  <img src="https://img.shields.io/badge/Mobile-Responsive-bf5af2?style=flat-square&labelColor=1a1a1a" alt="Responsive"/>
   <img src="https://img.shields.io/badge/Rating-4.8★-ffd60a?style=flat-square&labelColor=1a1a1a" alt="Rating"/>
 </p>
 
 ---
 
-## 🏪 What is Shreeji Mobile?
+## 🏪 What is Shreeji Mobile Franchise?
 
-**Shreeji Mobile** is a franchise-based mobile phone retail chain — think **McDonald's or Domino's, but for smartphones.** We don't manufacture phones; we bring every brand under one roof with expert guidance, unbeatable deals, and a franchise model that lets entrepreneurs build their own business backed by India's fastest-growing mobile retail brand.
+**Shreeji Mobile Franchise** is Gujarat's fastest-growing mobile phone retail franchise chain — think **McDonald's or Domino's, but for smartphones.** We don't manufacture phones; we bring every brand under one roof with expert guidance, unbeatable deals, and a franchise model that lets entrepreneurs across Gujarat build their own business.
 
-> Walk into any Shreeji Mobile store and discover the perfect phone — from Apple to Xiaomi — with honest advice and the best price, guaranteed.
+> Apple થી Xiaomi સુધી — ગુજરાતમાં કોઈપણ શ્રીજી મોબાઇલ સ્ટોરમાં આવો અને શ્રેષ્ઠ ફોન શોધો.
+>
+> *Walk into any Shreeji Mobile store across Gujarat and discover the perfect phone — from Apple to Xiaomi.*
 
 ---
 
@@ -38,9 +43,9 @@
 
 ---
 
-## ✨ Features <a name="features"></a>
+## ✨ Features
 
-### For Customers
+### For Customers (ગ્રાહકો માટે)
 - 📱 **All Brands, One Roof** — Apple, Samsung, OnePlus, Vivo, Xiaomi, Realme & 50+ more
 - 💰 **Best Price Guarantee** — We match any authorized retailer
 - 🛡️ **Shreeji Shield Warranty** — Free 6-month extended warranty on every phone
@@ -48,7 +53,7 @@
 - 🎧 **Accessories Hub** — Cases, chargers, earbuds, smartwatches & more
 - 🔧 **Free In-Store Service** — Screen protector, data transfer, phone setup
 
-### For Franchise Owners <a name="franchise"></a>
+### For Franchise Owners (ફ્રેન્ચાઇઝ માલિકો માટે)
 - 🏪 **Low Investment** — Start from just ₹5 Lakhs
 - 📦 **Full Supply Chain** — We handle inventory, logistics & vendor relationships
 - 🎨 **Turnkey Store Design** — Complete interior design & branding
@@ -58,66 +63,100 @@
 
 ---
 
+## 🇮🇳 Dual Language
+
+The entire website is available in **English** and **ગુજરાતી (Gujarati)**.
+
+| Feature | Detail |
+|:--------|:-------|
+| Default language | Gujarati (ગુજરાતી) |
+| Toggle | EN / GU pill button in navbar |
+| Coverage | 120+ translatable strings across all sections |
+| Font support | Noto Sans Gujarati (Google Fonts) for crisp rendering |
+| Persistence | Language preference saved to localStorage |
+| Responsive text | Gujarati-specific font sizing at every breakpoint |
+
+---
+
+## 🌓 Dark + Light Theme
+
+Auto-detects system preference with manual toggle override.
+
+| Feature | Detail |
+|:--------|:-------|
+| Detection | `prefers-color-scheme` media query |
+| Toggle | Sun/Moon button in navbar (desktop + mobile) |
+| Persistence | Saved to localStorage |
+| Variables | 30+ CSS custom properties per theme |
+| Brand logos | Greyscale by default, original brand colors on hover |
+
+---
+
 ## 🎨 Website Design
 
 Built with inspiration from **[Nothing Tech](https://in.nothing.tech/)** and **[Apple](https://www.apple.com/)**:
 
 | Design Element | Inspiration |
 |:---|:---|
-| Cursor-following glow effect | Nothing Tech |
+| Cursor-following orange glow | Nothing Tech |
 | Frosted glass navbar with blur | Apple |
-| Dark theme + orange brand accent | Custom Identity |
-| Monospace typography accents | Nothing Tech |
-| Scroll-triggered animations | Apple product pages |
-| Infinite brand marquee | Modern SaaS sites |
+| Dark/Light theme with orange accent | Custom Identity |
+| Monospace typography (JetBrains Mono) | Nothing Tech |
+| Scroll-triggered reveal animations | Apple product pages |
+| Infinite brand logo marquee | Modern SaaS sites |
 | Animated number counters | Both |
+| Brand logos with hover color reveal | Custom |
 
 ### Website Sections
 
 | # | Section | Description |
 |:--|:--------|:------------|
-| 1 | **Hero** | Animated counters, brand tagline, brand marquee |
-| 2 | **What We Offer** | 6 service cards with hover effects |
-| 3 | **Brands** | Authorized retailer grid (6 major brands) |
-| 4 | **Stats** | Scroll-animated counter cards |
-| 5 | **Franchise** | 4-step process + store mockup visual |
-| 6 | **Store Locator** | 8 cities with pulsing pins |
-| 7 | **Testimonials** | Reviews from owners & customers |
-| 8 | **CTA** | Dual call-to-action |
-| 9 | **Footer** | 5-column navigation + social links |
+| 1 | **Hero** | Animated counters (120+ stores, 25+ districts, 50+ brands), tagline, brand logo marquee |
+| 2 | **What We Offer** | 6 service cards — multi-brand, pricing, warranty, EMI, accessories, service |
+| 3 | **Brands** | Authorized retailer grid with real logos (Apple, Samsung, OnePlus, Vivo, Realme, Xiaomi) |
+| 4 | **Stats** | Scroll-animated counter cards (stores, districts, customers, rating) |
+| 5 | **Franchise** | 4-step process with store mockup showing branded phones (iPhone, Galaxy, OnePlus, Vivo, Redmi, Pixel) |
+| 6 | **Store Locator** | 8 Gujarat cities with pulsing location pins (Ahmedabad, Surat, Vadodara, Rajkot, etc.) |
+| 7 | **Testimonials** | Reviews from franchise owners and customers (tagged separately) |
+| 8 | **CTA** | Dual call-to-action (Find Store / Start Franchise) |
+| 9 | **Footer** | 5-column layout with social links, legal links |
 
 ---
 
 ## 🛠️ Tech Stack
 
 ```
-HTML5        — Semantic, accessible markup
-CSS3         — Custom properties, grid, flexbox, animations
-JavaScript   — Vanilla JS, zero dependencies
-Google Fonts — Inter + JetBrains Mono
+HTML5              — Semantic, accessible markup
+CSS3               — Custom properties, grid, flexbox, animations, media queries
+JavaScript         — Vanilla JS, zero dependencies
+Google Fonts       — Inter + JetBrains Mono + Noto Sans Gujarati
+Simple Icons CDN   — Real brand logos (Apple, Samsung, OnePlus, Xiaomi, etc.)
 ```
 
 ### Key Interactions
-
-- 🔵 **Cursor Glow** — Subtle orange radial glow follows mouse
-- 🔢 **Animated Counters** — Numbers count up with easing on scroll
-- 📜 **Scroll Reveal** — Elements fade in as they enter viewport
-- 🎠 **Brand Marquee** — Infinite scroll of 12+ brand logos
-- 🍔 **Mobile Menu** — Full-screen overlay with animated hamburger
-- 📍 **Pulsing Pins** — Store location pins with glow animation
+- 🔵 **Cursor Glow** — Subtle orange radial glow follows mouse (desktop only)
+- 🔢 **Animated Counters** — Numbers count up with cubic easing on scroll
+- 📜 **Scroll Reveal** — Elements fade in via IntersectionObserver
+- 🎠 **Brand Marquee** — 12 brand logos scroll infinitely, color on hover
+- 🍔 **Mobile Menu** — Full-screen overlay with body scroll lock
+- 📍 **Pulsing Pins** — Store location pins with animated glow
+- 🌓 **Theme Toggle** — Smooth dark/light switching with localStorage
+- 🇮🇳 **Language Toggle** — Instant EN/GU switching with 120+ translations
 
 ---
 
 ## 📱 Responsive Design
 
-Fully responsive with 3 breakpoints:
+Mobile-first with 3 breakpoints:
 
-| Breakpoint | Target | Adaptations |
-|:-----------|:-------|:------------|
-| `> 1024px` | Desktop | Full grid layouts, cursor glow |
-| `≤ 1024px` | Tablet | 2-column grids, compact cards |
-| `≤ 768px` | Mobile | Single column, full-screen menu, stacked CTAs |
-| `≤ 390px` | Small phones | Reduced typography, tighter spacing |
+| Breakpoint | Target | Key Adaptations |
+|:-----------|:-------|:----------------|
+| `> 1024px` | Desktop | Full grid layouts, cursor glow, multi-column footer |
+| `≤ 1024px` | Tablet | 2-column grids, compact cards, stacked franchise layout |
+| `≤ 768px` | Mobile | Single column, hamburger menu, full-width buttons, theme + lang toggles in navbar |
+| `≤ 390px` | Small phones | Reduced typography, tighter spacing, 2-col brand grid |
+
+Gujarati text gets separate sizing rules at each breakpoint to prevent overflow.
 
 ---
 
@@ -139,7 +178,7 @@ No build tools, no dependencies, no setup. Just open and go.
 
 ```
 ShreejiMobile/
-├── index.html   # Complete website (single file)
+├── index.html   # Complete website (single file, ~2000 lines)
 └── README.md    # This file
 ```
 
@@ -149,20 +188,41 @@ ShreejiMobile/
 
 | Property | Value |
 |:---------|:------|
-| **Name** | Shreeji Mobile |
+| **Name** | Shreeji Mobile Franchise |
+| **Gujarati** | શ્રીજી મોબાઇલ ફ્રેન્ચાઇઝ |
 | **Type** | Mobile Retail Franchise |
-| **Tagline** | India's #1 Mobile Retail Franchise |
+| **Region** | Gujarat, India |
+| **Tagline (EN)** | Gujarat's #1 Mobile Retail Franchise |
+| **Tagline (GU)** | ગુજરાતની #1 મોબાઇલ રિટેલ ફ્રેન્ચાઇઝ |
 | **Primary Color** | Orange `#ff6b2c` |
 | **Dark Background** | `#050505` |
+| **Light Background** | `#ffffff` |
 | **Blue Accent** | `#2997ff` |
 | **Green Accent** | `#30d158` |
 | **Purple Accent** | `#bf5af2` |
 | **Yellow Accent** | `#ffd60a` |
-| **Fonts** | Inter, JetBrains Mono |
+| **English Fonts** | Inter, JetBrains Mono |
+| **Gujarati Font** | Noto Sans Gujarati |
+
+---
+
+## 🤝 Authorized Brand Partners
+
+<p align="center">
+  <img src="https://cdn.simpleicons.org/apple/999999" height="24" alt="Apple">&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.simpleicons.org/samsung/1428A0" height="24" alt="Samsung">&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.simpleicons.org/oneplus/F5010C" height="24" alt="OnePlus">&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.simpleicons.org/xiaomi/FF6900" height="24" alt="Xiaomi">&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.simpleicons.org/google/4285F4" height="24" alt="Google">&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.simpleicons.org/motorola/E1000F" height="24" alt="Motorola">&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.simpleicons.org/huawei/FF0000" height="24" alt="Huawei">&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.simpleicons.org/lenovo/E2231A" height="24" alt="Lenovo">
+</p>
 
 ---
 
 <p align="center">
-  <strong>Shreeji Mobile</strong> — Every Brand. One Roof. Your Franchise.<br>
-  <sub>Made with 🧡 in India</sub>
+  <strong>શ્રીજી મોબાઇલ ફ્રેન્ચાઇઝ</strong> — દરેક બ્રાંડ. એક છત. તમારી ફ્રેન્ચાઇઝ.<br>
+  <strong>Shreeji Mobile Franchise</strong> — Every Brand. One Roof. Your Franchise.<br>
+  <sub>Made with 🧡 in Gujarat, India</sub>
 </p>
